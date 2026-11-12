@@ -160,6 +160,25 @@
   footer p { max-width: 640px; }
 
 
+  /* Link to the scroll story */
+  .deeper {
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+    max-width: 980px; padding: 28px 32px; border-radius: 28px;
+    background: var(--blue-soft); color: var(--ink); text-decoration: none;
+    transition: background .2s;
+  }
+  .deeper:hover { background: #E1E9FF; }
+  .deeper span { display: block; }
+  .deeper .k {
+    font-family: var(--display); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue);
+  }
+  .deeper .t {
+    font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.1rem);
+    letter-spacing: -0.02em; line-height: 1.1; margin: 6px 0 8px;
+  }
+  .deeper .d { color: var(--muted); max-width: 520px; }
+
   /* Myth cards */
   .myths {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
@@ -406,7 +425,7 @@
     </ul>
   </section>
 
-  <section class="part">
+  <section class="part" id="day">
     <h2>A day with type 1</h2>
     <p class="prose">Follow Maya, an imaginary 12-year-old, through a school day. Drag the slider or pick a moment to see how food, sport and insulin move her blood sugar.</p>
     <div class="day">
@@ -428,7 +447,7 @@
     <p class="prose" style="color: var(--muted); font-size: 0.95rem; margin-top: 18px;">This is a made-up example. Real days vary a lot, and each person's target range is set with their care team.</p>
   </section>
 
-  <section class="part">
+  <section class="part" id="low">
     <h2>If someone is having a low</h2>
     <p class="prose">Low blood sugar comes on fast and needs sugar straight away. Anyone can help.</p>
     <ul class="low-signs">
@@ -459,6 +478,17 @@
       <div class="sign"><b>Thinner</b><span>losing weight without trying</span></div>
     </div>
     <p class="prose">If you notice these, especially in a child, see a doctor the same day. A simple blood or urine test can check for it.</p>
+  </section>
+
+  <section class="part">
+    <a class="deeper" href="below-the-surface.html">
+      <span>
+        <span class="k">Go deeper</span>
+        <span class="t">Below the surface</span>
+        <span class="d">Scroll beneath one ordinary dinner to see the hidden work of living with type 1.</span>
+      </span>
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#2F5BEA"/><path d="M12 22h19M23.5 14l8 8-8 8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </section>
 
   <section class="closing">
