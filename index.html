@@ -159,6 +159,91 @@
   footer { padding: 48px 0 56px; font-size: 0.95rem; color: var(--muted); }
   footer p { max-width: 640px; }
 
+
+  /* Myth cards */
+  .myths {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-top: 28px; max-width: 980px;
+  }
+  .myth {
+    font: inherit; text-align: left; color: var(--ink);
+    background: var(--blue-soft); border: 0; border-radius: 24px;
+    padding: 24px 24px 22px; min-height: 250px;
+    display: flex; flex-direction: column; cursor: pointer;
+    transition: background .25s, color .25s;
+  }
+  .myth .k {
+    font-family: var(--display); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  .myth .q {
+    font-family: var(--display); font-weight: 600; font-size: 1.45rem;
+    line-height: 1.18; letter-spacing: -0.015em; margin-top: 12px;
+  }
+  .myth .verdict {
+    font-family: var(--display); font-weight: 800; font-size: 2.25rem;
+    letter-spacing: -0.02em; line-height: 1; margin: 12px 0 10px; color: var(--amber);
+  }
+  .myth .verdict.true { color: #9FB4FF; }
+  .myth .a { font-size: 1.0625rem; line-height: 1.5; color: #C9D0DC; }
+  .myth .tap {
+    margin-top: auto; padding-top: 18px;
+    font-family: var(--display); font-size: 0.9rem; font-weight: 600; color: var(--blue);
+  }
+  .myth .back { display: none; flex-direction: column; flex: 1; }
+  .myth .front { display: flex; flex-direction: column; flex: 1; }
+  .myth[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .myth[aria-pressed="true"] .k { color: #9FB4FF; }
+  .myth[aria-pressed="true"] .tap { color: #9FB4FF; }
+  .myth[aria-pressed="true"] .front { display: none; }
+  .myth[aria-pressed="true"] .back { display: flex; }
+
+  /* A day with type 1 */
+  .day { margin-top: 28px; }
+  .day .stage { padding: 12px 8px 4px; }
+  .day input[type="range"] {
+    display: block; width: 100%; margin: 18px 0 0; accent-color: var(--blue); cursor: pointer;
+  }
+  .day .readout { margin-top: 18px; }
+  .day .story h3 { margin-bottom: 4px; }
+  .day .story p { margin: 0; color: var(--muted); max-width: 600px; min-height: 4.95em; }
+  .day .now { font-family: var(--display); font-size: 0.9rem; color: var(--muted); min-width: 190px; }
+  .day .now strong {
+    display: block; font-size: 2.1rem; font-weight: 800; color: var(--ink);
+    letter-spacing: -0.02em; line-height: 1.15; font-variant-numeric: tabular-nums;
+  }
+  .day .now strong small { font-size: 0.95rem; font-weight: 600; }
+  .day .controls { margin: 18px 0 0; }
+
+  /* Low blood sugar help */
+  .low-signs {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin: 24px 0 28px; padding: 0; list-style: none;
+    font-family: var(--display); font-size: 0.975rem; font-weight: 600;
+  }
+  .low-signs li { background: #FFF4DF; border-radius: 999px; padding: 7px 15px; }
+  .low-signs li.label { background: none; padding-left: 0; color: var(--muted); font-weight: 400; }
+  .steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1.5px solid var(--ink); max-width: 980px;
+    list-style: none; margin: 0; padding: 0;
+  }
+  .steps li { padding: 22px 26px 4px 0; }
+  .steps li + li { padding-left: 26px; border-left: 1px solid var(--line); }
+  .steps .n {
+    display: block; font-family: var(--display); font-weight: 800; font-size: 3rem;
+    line-height: 1; letter-spacing: -0.03em; color: var(--blue); margin-bottom: 10px;
+  }
+  .steps p { color: var(--muted); font-size: 1.0625rem; }
+  .emergency {
+    margin-top: 28px; max-width: 980px;
+    background: var(--ink); color: #fff; border-radius: 22px; padding: 24px 28px;
+    display: grid; grid-template-columns: 48px 1fr; gap: 18px; align-items: start;
+  }
+  .emergency h3 { color: #fff; }
+  .emergency p { margin: 0; color: #C9D0DC; font-size: 1.0625rem; }
+  .emergency strong { color: #fff; font-weight: 500; }
+
   @media (max-width: 720px) {
     body { font-size: 1.0625rem; }
     .hero { padding-top: 40px; }
@@ -170,6 +255,16 @@
     .signs { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
     .living li { grid-template-columns: 44px 1fr; gap: 14px; }
     .living svg { width: 40px; height: 40px; }
+    .myths { grid-template-columns: 1fr; }
+    .myth { min-height: 0; }
+    .steps { grid-template-columns: 1fr; }
+    .steps li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+    .emergency { grid-template-columns: 1fr; gap: 12px; padding: 22px; }
+    .day .story p { min-height: 0; }
+    .day svg text { font-size: 30px; }
+    .day svg text.unit { display: none; }
+    .day svg text.band { font-size: 22px; }
+    .day svg path { stroke-width: 7px; }
   }
 </style>
 </head>
@@ -247,6 +342,43 @@
   </section>
 
   <section class="part">
+    <h2>True or false?</h2>
+    <p class="prose">Tap a card to flip it. Most people get at least one of these wrong.</p>
+    <div class="myths">
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">1 of 6</span>
+        <span class="front"><span class="q">“Eating too much sugar causes type 1.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Type 1 is an autoimmune condition. Nothing a person ate or did causes it.</span><span class="tap">“Eating too much sugar causes type 1.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">2 of 6</span>
+        <span class="front"><span class="q">“People with type 1 can never eat sweets.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">They can eat sweets. They match the insulin they take to the food, the same job a pancreas does on its own.</span><span class="tap">“People with type 1 can never eat sweets.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">3 of 6</span>
+        <span class="front"><span class="q">“Kids grow out of it.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Type 1 is lifelong. The cells that make insulin don't come back.</span><span class="tap">“Kids grow out of it.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">4 of 6</span>
+        <span class="front"><span class="q">“You can catch it from someone.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Type 1 isn't contagious. It can't pass from one person to another.</span><span class="tap">“You can catch it from someone.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">5 of 6</span>
+        <span class="front"><span class="q">“Adults can get type 1 too.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict true">True.</span><span class="a">It often starts in childhood, but it can begin at any age. Many people are diagnosed as adults.</span><span class="tap">“Adults can get type 1 too.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">6 of 6</span>
+        <span class="front"><span class="q">“Insulin is a cure.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Insulin keeps people with type 1 alive and well, but it's a daily treatment. There's no cure yet.</span><span class="tap">“Insulin is a cure.”</span></span>
+      </button>
+    </div>
+  </section>
+
+  <section class="part">
     <h2>Living with it</h2>
     <p class="prose">There's no cure yet, but type 1 is very manageable. Day to day, it comes down to three things.</p>
     <ul class="living">
@@ -272,6 +404,49 @@
         </div>
       </li>
     </ul>
+  </section>
+
+  <section class="part">
+    <h2>A day with type 1</h2>
+    <p class="prose">Follow Maya, an imaginary 12-year-old, through a school day. Drag the slider or pick a moment to see how food, sport and insulin move her blood sugar.</p>
+    <div class="day">
+      <div class="stage">
+        <svg id="dayChart" viewBox="0 0 1040 400" role="img" aria-labelledby="day-desc">
+          <desc id="day-desc">A line chart of blood sugar from 7 am to 11 pm. It rises after each meal, falls during PE class, dips below the target range at about 3 pm, and returns to range after juice.</desc>
+        </svg>
+      </div>
+      <input type="range" id="dayTime" min="7" max="23" step="0.05" value="15.15" aria-label="Time of day">
+      <div class="readout">
+        <div class="story" aria-live="polite">
+          <h3 id="dayTitle"></h3>
+          <p id="dayText"></p>
+        </div>
+        <div class="now">Blood sugar now<strong><span id="dayValue"></span> <small>mg/dL</small></strong><span id="dayStatus"></span></div>
+      </div>
+      <div class="controls" id="dayJump" role="group" aria-label="Jump to a moment in the day"></div>
+    </div>
+    <p class="prose" style="color: var(--muted); font-size: 0.95rem; margin-top: 18px;">This is a made-up example. Real days vary a lot, and each person's target range is set with their care team.</p>
+  </section>
+
+  <section class="part">
+    <h2>If someone is having a low</h2>
+    <p class="prose">Low blood sugar comes on fast and needs sugar straight away. Anyone can help.</p>
+    <ul class="low-signs">
+      <li class="label">Look for</li>
+      <li>Shaky</li><li>Sweaty</li><li>Pale</li><li>Confused or irritable</li><li>Suddenly very hungry</li>
+    </ul>
+    <ol class="steps">
+      <li><span class="n" aria-hidden="true">1</span><h3>Give fast sugar</h3><p>A small juice box, regular (not diet) soda, or 3 to 4 glucose tablets. About 15 grams of sugar.</p></li>
+      <li><span class="n" aria-hidden="true">2</span><h3>Wait 15 minutes</h3><p>Stay with them and have them sit down. Then they check their blood sugar again.</p></li>
+      <li><span class="n" aria-hidden="true">3</span><h3>Still low? Repeat</h3><p>Give the same amount again. Once they feel better, a snack helps keep it steady.</p></li>
+    </ol>
+    <div class="emergency">
+      <svg width="48" height="48" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="#F2A93B"/><rect x="23" y="12" width="6" height="19" rx="3" fill="#1B2430"/><circle cx="26" cy="38" r="3.5" fill="#1B2430"/></svg>
+      <div>
+        <h3>If they pass out or can't swallow</h3>
+        <p><strong>Don't give food or drink.</strong> Lay them on their side, call emergency services, and use their glucagon kit if they carry one.</p>
+      </div>
+    </div>
   </section>
 
   <section class="part">
@@ -465,6 +640,130 @@
     for (let i = 0; i < 14; i++) spawn(Math.random() * 400, 25 + Math.random() * 270);
     requestAnimationFrame(tick);
   }
+})();
+</script>
+<script>
+// Myth cards: tap to flip
+document.querySelectorAll(".myth").forEach(card => {
+  card.addEventListener("click", () => {
+    card.setAttribute("aria-pressed", card.getAttribute("aria-pressed") === "true" ? "false" : "true");
+  });
+});
+
+// A day with type 1
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("dayChart");
+  const slider = document.getElementById("dayTime");
+  const F = "Bricolage Grotesque, sans-serif";
+  const X0 = 70, X1 = 1010, Y0 = 40, Y1 = 320, T0 = 7, T1 = 23, G0 = 40, G1 = 260;
+  const x = t => X0 + (t - T0) / (T1 - T0) * (X1 - X0);
+  const y = g => Y1 - (g - G0) / (G1 - G0) * (Y1 - Y0);
+  const el = (name, attrs, text) => {
+    const e = document.createElementNS(NS, name);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  };
+
+  // Target band, 70 to 180 mg/dL
+  el("rect", { x: X0, y: y(180), width: X1 - X0, height: y(70) - y(180), fill: "#FFFFFF", rx: 10 });
+  el("text", { class: "band", x: x(16.1), y: y(180) + 24, "font-family": F, "font-size": 13, "font-weight": 600, fill: "#5F6878" }, "Target range");
+  [70, 180, 250].forEach(g =>
+    el("text", { x: X0 - 12, y: y(g) + 5, "text-anchor": "end", "font-family": F, "font-size": 13, fill: "#5F6878" }, g));
+  el("text", { class: "unit", x: X0 - 12, y: Y0 - 14, "text-anchor": "end", "font-family": F, "font-size": 12, fill: "#5F6878" }, "mg/dL");
+  [[7, "7 am"], [10, "10 am"], [13, "1 pm"], [16, "4 pm"], [19, "7 pm"], [22, "10 pm"]].forEach(([t, label]) =>
+    el("text", { x: x(t), y: Y1 + 28, "text-anchor": "middle", "font-family": F, "font-size": 13, fill: "#5F6878" }, label));
+
+  // Example readings: [hour, mg/dL]
+  const pts = [[7,110],[7.5,118],[8.2,165],[9,188],[9.8,150],[10.5,125],[11.2,98],[12,92],[12.5,105],[13.3,170],[14,160],[14.6,112],[15.15,62],[15.6,84],[16.2,118],[17,128],[18,120],[18.6,128],[19.5,176],[20.3,158],[21.2,132],[22,120],[23,114]];
+
+  // Smooth curve through the readings, also sampled so the marker can follow it
+  const P = pts.map(([t, g]) => [x(t), y(g)]);
+  const samples = [];
+  let d = `M${P[0][0]},${P[0][1]}`;
+  for (let i = 0; i < P.length - 1; i++) {
+    const p0 = P[Math.max(i - 1, 0)], p1 = P[i], p2 = P[i + 1], p3 = P[Math.min(i + 2, P.length - 1)];
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+    for (let k = 0; k <= 24; k++) {
+      const u = k / 24, v = 1 - u;
+      samples.push([
+        v*v*v*p1[0] + 3*v*v*u*c1[0] + 3*v*u*u*c2[0] + u*u*u*p2[0],
+        v*v*v*p1[1] + 3*v*v*u*c1[1] + 3*v*u*u*c2[1] + u*u*u*p2[1]
+      ]);
+    }
+  }
+  el("path", { d, fill: "none", stroke: "#2F5BEA", "stroke-width": 4, "stroke-linecap": "round", "stroke-linejoin": "round" });
+
+  const curveY = px => {
+    let i = 1;
+    while (i < samples.length - 1 && samples[i][0] < px) i++;
+    const [ax, ay] = samples[i - 1], [bx, by] = samples[i];
+    return bx === ax ? by : ay + (by - ay) * (px - ax) / (bx - ax);
+  };
+
+  // The story of the day. "jump" entries get a button.
+  const moments = [
+    { t: 7,     title: "Wake up", text: "Maya checks the sensor on her arm before getting out of bed. She's in range, a good start to the day." },
+    { t: 7.5,   jump: "Breakfast", title: "Breakfast", text: "She counts the carbs in her cereal and takes insulin to match. Sugar rises after eating, then comes back down as the insulin works." },
+    { t: 11.2,  jump: "PE class", title: "PE class", text: "Exercise uses up sugar, so her level drifts down. She checks before class and keeps juice in her bag just in case." },
+    { t: 12.5,  jump: "Lunch", title: "Lunch", text: "Carbs counted, insulin taken. Her sugar climbs after the meal and settles again over the next couple of hours." },
+    { t: 14.6,  title: "Dropping fast", text: "The insulin from lunch is still working and PE used up more sugar than expected. Her level is falling quickly." },
+    { t: 15.0,  jump: "Low", jumpTo: 15.15, title: "A low after PE", text: "Maya feels shaky and her sensor alarm goes off. She drinks a juice box and sits down for a few minutes." },
+    { t: 15.6,  title: "Back in range", text: "Twenty minutes later the juice has done its job. She has a small snack to stay steady and carries on with her afternoon." },
+    { t: 18.6,  jump: "Dinner", title: "Dinner", text: "Dinner with the family. Same routine as every meal: count the carbs, take the insulin, then eat." },
+    { t: 22,    jump: "Bedtime", title: "Bedtime", text: "One last check. Overnight, her sensor keeps watch and will sound an alarm to wake her and her parents if she goes low." }
+  ];
+
+  // Dots on the curve for the main moments
+  moments.filter(m => m.jump).forEach(m => {
+    const t = m.jumpTo || m.t;
+    el("circle", { cx: x(t), cy: curveY(x(t)), r: 5, fill: "#FFFFFF", stroke: "#2F5BEA", "stroke-width": 3 });
+  });
+
+  const guide = el("line", { y1: Y0 - 6, y2: Y1 + 8, stroke: "#1B2430", "stroke-width": 1.5, "stroke-dasharray": "4 5" });
+  const marker = el("circle", { r: 10, fill: "#F2A93B", stroke: "#1B2430", "stroke-width": 3 });
+
+  const jump = document.getElementById("dayJump");
+  const buttons = moments.filter(m => m.jump).map(m => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = m.jump;
+    b.addEventListener("click", () => { slider.value = m.jumpTo || m.t; render(); });
+    jump.appendChild(b);
+    return { b, m };
+  });
+
+  const clock = t => {
+    let h = Math.floor(t + 1e-6), min = Math.round((t - h) * 60);
+    if (min === 60) { h += 1; min = 0; }
+    return `${((h + 11) % 12) + 1}:${String(min).padStart(2, "0")} ${h < 12 ? "am" : "pm"}`;
+  };
+
+  function render() {
+    const t = parseFloat(slider.value);
+    const px = x(t), py = curveY(px);
+    const g = Math.round(G0 + (Y1 - py) / (Y1 - Y0) * (G1 - G0));
+    guide.setAttribute("x1", px); guide.setAttribute("x2", px);
+    marker.setAttribute("cx", px); marker.setAttribute("cy", py);
+
+    let now = moments[0];
+    for (const m of moments) if (m.t <= t + 1e-6) now = m;
+    document.getElementById("dayTitle").textContent = `${clock(t)} · ${now.title}`;
+    document.getElementById("dayText").textContent = now.text;
+    document.getElementById("dayValue").textContent = g;
+    document.getElementById("dayStatus").textContent =
+      (g < 70 ? "below target range" : g > 180 ? "above target range" : "in target range") +
+      ` · ${(g / 18).toFixed(1)} mmol/L`;
+    slider.setAttribute("aria-valuetext", `${clock(t)}, ${g} milligrams per decilitre`);
+    buttons.forEach(({ b, m }) => b.setAttribute("aria-pressed", m === now ? "true" : "false"));
+  }
+
+  slider.addEventListener("input", render);
+  render();
 })();
 </script>
 </body>
