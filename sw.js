@@ -1,6 +1,6 @@
 // Lets the Low helper open with no connection. Other pages are left alone.
-const CACHE = "low-helper-v1";
-const SHELL = ["low-helper.html", "low-helper.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
+const CACHE = "low-helper-v2";
+const SHELL = ["low-helper.html", "disclaimer.html", "low-helper.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 const FONT_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
 self.addEventListener("install", event => {
@@ -30,13 +30,20 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // The helper's own files: try the network for the latest, fall back to the saved copy
+  // The helper's own files: answer from the saved copy at once, so a weak signal never
+  // holds it up, and fetch the latest in the background for next time
   const file = url.pathname.split("/").pop();
   if (url.origin === location.origin && SHELL.includes(file)) {
     event.respondWith(
-      fetch(req)
-        .then(res => { const copy = res.clone(); caches.open(CACHE).then(c => c.put(file, copy)); return res; })
-        .catch(() => caches.match(file))
+      caches.open(CACHE).then(cache =>
+        cache.match(file).then(hit => {
+          const fresh = fetch(req)
+            .then(res => { if (res.ok) cache.put(file, res.clone()); return res; })
+            .catch(() => hit);
+          if (hit) event.waitUntil(fresh);
+          return hit || fresh;
+        })
+      )
     );
   }
 });

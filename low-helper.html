@@ -150,7 +150,6 @@
   @keyframes fade { from { opacity: 0; } }
 
   /* Emergency */
-  .call { background: var(--amber); border-color: var(--amber); color: var(--ink); min-height: 76px; font-size: 1.45rem; }
   .todo { list-style: none; margin: 22px 0 0; padding: 0; counter-reset: n; }
   .todo li {
     display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start;
@@ -171,6 +170,8 @@
   .after b { display: block; font-family: var(--display); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
 
   .foot { margin-top: 18px; font-size: 0.875rem; line-height: 1.4; color: var(--soft); }
+  .notice { border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; color: var(--muted); }
+  .legal { margin: 16px 0 0; text-align: center; font-size: 0.8125rem; color: var(--soft); opacity: 0.9; }
   [hidden] { display: none !important; }
 
   @media (min-width: 620px) {
@@ -212,7 +213,7 @@
       <button type="button" class="btn" data-go="sugar">Yes, they're awake <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13h15M13.5 6l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button type="button" class="btn ghost" data-go="emergency">No, or they're having a seizure</button>
     </div>
-    <p class="foot">General first aid based on CDC and NHS guidance. If they have their own care plan, follow that. <a href="index.html#sources">Sources</a></p>
+    <p class="foot notice">This is general first-aid information, not medical advice, and not a medical device. If they have their own care plan, follow that. If you are unsure at any point, call your local medical emergency number.</p>
   </section>
 
   <!-- Step 1 -->
@@ -268,7 +269,7 @@
       <button type="button" class="btn ghost" data-go="check">They feel better already</button>
       <button type="button" class="btn ghost" data-go="emergency">They're getting worse</button>
     </div>
-    <p class="foot" style="text-align:center">Keep this screen open. It will buzz when the time is up.</p>
+    <p class="foot" style="text-align:center">Keep this screen open. It should chime when the time is up, but don't rely on the alarm alone: keep an eye on the clock and on them.</p>
   </section>
 
   <!-- Step 3 -->
@@ -307,9 +308,8 @@
   <section class="screen" data-name="emergency" hidden>
     <div class="body">
       <p class="step">Emergency</p>
-      <h1>Call for help now</h1>
-      <a class="btn call" id="callBtn" href="tel:112">Call 112 <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M8 3h4l2 6-3 2a13 13 0 0 0 6 6l2-3 6 2v4a3 3 0 0 1-3 3A20 20 0 0 1 5 6a3 3 0 0 1 3-3Z" fill="currentColor"/></svg></a>
-      <p class="note" id="callNote">Or your local emergency number. Say “diabetic, unconscious”.</p>
+      <h1>Call your local medical emergency number now</h1>
+      <p class="lede">Use your phone to call. Say “diabetic, unconscious”.</p>
       <ol class="todo">
         <li><div><b>Nothing in their mouth</b>No food, no drink. They could choke.</div></li>
         <li><div><b>Lay them on their side</b>Top knee bent, head tilted back a little so they can breathe.
@@ -331,6 +331,7 @@
     </div>
   </section>
   </main>
+  <p class="legal">General information, not medical advice. <a href="disclaimer.html">Disclaimer</a> · <a href="index.html#sources">Sources</a></p>
 </div>
 
 <script>
@@ -348,8 +349,15 @@
   ringFill.style.strokeDasharray = RING;
 
   let state = { screen: "start", endAt: 0, round: 1 };
-  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
-  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } };
+  // Progress is kept for an hour, so a reload mid-way resumes but a later visit starts fresh
+  const KEEP = 60 * 60 * 1000;
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ ...state, at: Date.now() })); } catch (e) {} };
+  const load = () => {
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY));
+      return s && s.at && Date.now() - s.at < KEEP ? s : null;
+    } catch (e) { return null; }
+  };
 
   /* ---------- Sound, vibration, keeping the screen on ---------- */
   let audio = null, lock = null;
@@ -426,8 +434,9 @@
       const r = state.round;
       document.getElementById("sugarStep").textContent = r === 1 ? "Step 1 of 3" : "Round " + r;
       document.getElementById("sugarTitle").textContent = r === 1 ? "Give fast sugar now" : "Give the same again";
-      document.getElementById("sugarLede").textContent = r >= 3
-        ? "This is round " + r + ". If they are not improving, call emergency services now."
+      document.getElementById("sugarLede").textContent = r >= 4
+        ? "Three rounds have not worked. Call your local medical emergency number now."
+        : r === 3 ? "A third try. If this one does not work either, call your local medical emergency number."
         : r === 2 ? "Another 15 grams. Any one of these, then wait again."
         : "Any one of these. About 15 grams of sugar.";
     }
@@ -450,27 +459,12 @@
     if (document.visibilityState === "visible" && state.screen === "timer") { drawTimer(); keepAwake(true); }
   });
 
-  /* ---------- Emergency number, guessed from the device's region ---------- */
-  (() => {
-    let tz = "", num = "112";
-    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
-    const lang = (navigator.language || "").toUpperCase();
-    if (/^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Toronto|Vancouver|Edmonton|Winnipeg|Halifax|Detroit|Boise|Indiana|Kentucky)|Pacific\/Honolulu)/.test(tz)) num = "911";
-    else if (tz === "Europe/London" || /-GB$/.test(lang)) num = "999";
-    else if (/^Australia\//.test(tz)) num = "000";
-    else if (tz === "Pacific/Auckland") num = "111";
-    const a = document.getElementById("callBtn");
-    a.href = "tel:" + num;
-    a.firstChild.textContent = "Call " + num + " ";
-  })();
-
   /* ---------- Pick up where we left off ---------- */
   const saved = load();
   if (saved && saved.screen === "timer" && saved.endAt) {
     state = saved;
     if (saved.endAt > Date.now()) go("timer", { resume: true, quiet: true });
-    else if (Date.now() - saved.endAt < 60 * 60 * 1000) go("check", { quiet: true });
-    else go("start", { quiet: true });
+    else go("check", { quiet: true });
   } else if (saved && ["sugar", "check"].includes(saved.screen)) {
     state = saved; go(saved.screen, { quiet: true });
   }
