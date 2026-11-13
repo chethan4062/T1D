@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Low helper · Type 1, explained</title>
+<meta name="description" content="A step-by-step guide to open when someone with diabetes is having a low. One clear step at a time, with a 15-minute timer.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="canonical" href="https://chethan4062.github.io/T1D/low-helper.html">
+<link rel="manifest" href="low-helper.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Low helper">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Type 1, explained">
+<meta property="og:title" content="Low helper: what to do when someone is having a low">
+<meta property="og:description" content="Open this when someone with diabetes has low blood sugar. One clear step at a time, with a 15-minute timer.">
+<meta property="og:url" content="https://chethan4062.github.io/T1D/low-helper.html">
+<meta property="og:image" content="https://chethan4062.github.io/T1D/share-low.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Low helper. A 15-minute countdown ring.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Low helper: what to do when someone is having a low">
+<meta name="twitter:description" content="Open this when someone with diabetes has low blood sugar. One clear step at a time, with a 15-minute timer.">
+<meta name="twitter:image" content="https://chethan4062.github.io/T1D/share-low.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --ink: #1B2430;
+    --muted: #5F6878;
+    --blue: #2F5BEA;
+    --blue-soft: #EEF3FF;
+    --amber: #F2A93B;
+    --navy: #0E1633;
+    --line: #E3E7EE;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --body: "Newsreader", Georgia, serif;
+    /* Each screen sets these */
+    --bg: var(--paper);
+    --fg: var(--ink);
+    --soft: var(--muted);
+    --accent: var(--blue);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; height: 100%; }
+  body {
+    margin: 0; min-height: 100%;
+    background: var(--bg); color: var(--fg);
+    font-family: var(--body); font-size: 1.1875rem; line-height: 1.5;
+    transition: background-color .45s ease, color .45s ease;
+  }
+  body[data-screen="sugar"]     { --bg: var(--amber); --fg: var(--ink); --soft: #4A3608; --accent: var(--ink); }
+  body[data-screen="timer"]     { --bg: var(--navy);  --fg: #FFFFFF;   --soft: #B9C4E4; --accent: var(--amber); }
+  body[data-screen="check"]     { --bg: var(--blue);  --fg: #FFFFFF;   --soft: #D5DEFF; --accent: #FFFFFF; }
+  body[data-screen="done"]      { --bg: var(--blue-soft); --fg: var(--ink); --soft: var(--muted); --accent: var(--blue); }
+  body[data-screen="emergency"] { --bg: var(--ink);   --fg: #FFFFFF;   --soft: #C9D0DC; --accent: var(--amber); }
+
+  h1, h2 { font-family: var(--display); margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  .app {
+    min-height: 100vh; min-height: 100dvh;
+    max-width: 560px; margin: 0 auto;
+    display: flex; flex-direction: column;
+    padding: max(14px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+  }
+
+  /* Top bar: brand, and the button that is always there */
+  .bar {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    font-family: var(--display); font-weight: 600; font-size: 0.95rem;
+    min-height: 48px;
+  }
+  .bar a { text-decoration: none; display: inline-flex; align-items: center; gap: 9px; }
+  .bar a circle { stroke: currentColor; }
+  .sos {
+    font-size: 0.95rem; font-weight: 600;
+    background: var(--ink); color: #fff; border: 2px solid var(--ink);
+    border-radius: 999px; padding: 10px 16px 10px 12px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .sos i { width: 22px; height: 22px; border-radius: 50%; background: var(--amber); color: var(--ink); font-style: normal; font-weight: 800; display: grid; place-items: center; font-size: 0.9rem; }
+  body[data-screen="timer"] .sos, body[data-screen="check"] .sos { background: #FFFFFF; color: var(--ink); border-color: #FFFFFF; }
+  body[data-screen="emergency"] .sos { display: none; }
+
+  main { flex: 1; display: flex; flex-direction: column; }
+  [tabindex="-1"]:focus { outline: none; }
+
+  /* Screens */
+  .screen { flex: 1; display: flex; flex-direction: column; padding-top: 18px; animation: arrive .4s ease both; }
+  @keyframes arrive { from { opacity: 0; transform: translateY(14px); } }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 8px 0 24px; }
+  .step {
+    font-family: var(--display); font-weight: 600; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); margin-bottom: 12px;
+  }
+  h1 { font-weight: 800; font-size: clamp(2.3rem, 10vw, 3.4rem); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 14px; }
+  .lede { font-size: 1.25rem; line-height: 1.4; color: var(--soft); }
+  .note { font-size: 1rem; color: var(--soft); margin-top: 16px; }
+
+  .actions { display: flex; flex-direction: column; gap: 10px; }
+  .btn {
+    width: 100%; min-height: 64px; padding: 16px 22px;
+    font-family: var(--display); font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; line-height: 1.15;
+    border-radius: 20px; border: 2.5px solid var(--fg);
+    background: var(--fg); color: var(--bg);
+    display: flex; align-items: center; justify-content: space-between; gap: 14px; text-align: left; text-decoration: none;
+    transition: transform .12s ease;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn.ghost { background: transparent; color: var(--fg); font-weight: 600; font-size: 1.1rem; min-height: 56px; }
+  .btn small { display: block; font-family: var(--body); font-weight: 400; font-size: 1rem; letter-spacing: 0; opacity: 0.85; margin-top: 2px; }
+  .btn svg { flex: none; }
+
+  /* Step 1: what to give */
+  .foods { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .foods li {
+    background: #FFFFFF; border-radius: 18px; padding: 14px 14px 12px;
+    font-family: var(--display); font-size: 0.95rem; font-weight: 600; line-height: 1.2; color: var(--ink);
+    display: flex; flex-direction: column; gap: 8px; min-width: 0;
+  }
+  .foods b { display: block; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; }
+  .foods span { display: block; font-weight: 400; color: var(--muted); }
+  .nots { margin-top: 14px; font-size: 1rem; color: var(--soft); }
+
+  /* Step 2: the timer */
+  .ringwrap { position: relative; width: min(74vw, 44vh, 340px); margin: 6px auto 22px; aspect-ratio: 1; }
+  .pulse { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #3F5296; animation: breathe 8s ease-in-out infinite; }
+  .pulse.two { animation-delay: -4s; }
+  @keyframes breathe { 0%, 100% { transform: scale(0.94); opacity: 0.2; } 50% { transform: scale(1.1); opacity: 0.75; } }
+  .ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 10; }
+  .ring .track { stroke: #1F2C5C; }
+  .ring .fill { stroke: var(--amber); stroke-linecap: round; transition: stroke-dashoffset 1s linear; }
+  .clock { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; font-family: var(--display); }
+  .clock b { font-weight: 800; font-size: clamp(3.4rem, 19vw, 5.2rem); letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .clock span { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); margin-top: 6px; }
+  .calm { text-align: center; min-height: 3.2em; }
+  .calm h2 { font-weight: 800; font-size: 1.7rem; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 6px; }
+  .calm p { color: var(--soft); font-size: 1.1rem; }
+  .fade { animation: fade .6s ease both; }
+  @keyframes fade { from { opacity: 0; } }
+
+  /* Emergency */
+  .call { background: var(--amber); border-color: var(--amber); color: var(--ink); min-height: 76px; font-size: 1.45rem; }
+  .todo { list-style: none; margin: 22px 0 0; padding: 0; counter-reset: n; }
+  .todo li {
+    display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start;
+    padding: 14px 0; border-top: 1px solid #36404F; font-size: 1.1rem; line-height: 1.35; color: var(--soft);
+  }
+  .todo li::before {
+    counter-increment: n; content: counter(n);
+    width: 40px; height: 40px; border-radius: 50%; background: #2A3442; color: #fff;
+    font-family: var(--display); font-weight: 800; display: grid; place-items: center;
+  }
+  .todo b { display: block; font-family: var(--display); font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; color: #fff; }
+  .side { display: block; width: 100%; max-width: 250px; height: auto; margin-top: 10px; }
+
+  /* Done */
+  .tick { width: 84px; height: 84px; margin-bottom: 18px; }
+  .after { list-style: none; margin: 20px 0 0; padding: 0; border-top: 1.5px solid var(--ink); }
+  .after li { padding: 13px 0; border-bottom: 1px solid #D5DEF5; font-size: 1.1rem; line-height: 1.35; color: var(--soft); }
+  .after b { display: block; font-family: var(--display); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+
+  .foot { margin-top: 18px; font-size: 0.875rem; line-height: 1.4; color: var(--soft); }
+  [hidden] { display: none !important; }
+
+  @media (min-width: 620px) {
+    .app { padding-top: 24px; padding-bottom: 32px; }
+  }
+  @media (max-height: 640px) {
+    h1 { font-size: 2.1rem; }
+    .lede { font-size: 1.1rem; }
+    .foods li { padding: 10px 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .screen, .fade, .pulse { animation: none; }
+    .pulse { opacity: 0.4; }
+    body { transition: none; }
+  }
+</style>
+</head>
+<body data-screen="start">
+<div class="app">
+
+  <header class="bar">
+    <a href="index.html" aria-label="Type 1, explained: back to the explainer">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8.5" fill="none" stroke-width="3"/></svg>
+      Low helper
+    </a>
+    <button type="button" class="sos" data-go="emergency"><i aria-hidden="true">!</i>Passed out?</button>
+  </header>
+
+  <main>
+  <!-- Start -->
+  <section class="screen" data-name="start">
+    <div class="body">
+      <p class="step">Low blood sugar</p>
+      <h1>Is someone having a low?</h1>
+      <p class="lede">Shaky, sweaty, pale, confused or suddenly very hungry. This will walk you through it, one step at a time.</p>
+      <p class="note">First question: are they awake and able to swallow?</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" data-go="sugar">Yes, they're awake <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13h15M13.5 6l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="btn ghost" data-go="emergency">No, or they're having a seizure</button>
+    </div>
+    <p class="foot">General first aid based on CDC and NHS guidance. If they have their own care plan, follow that. <a href="index.html#sources">Sources</a></p>
+  </section>
+
+  <!-- Step 1 -->
+  <section class="screen" data-name="sugar" hidden>
+    <div class="body">
+      <p class="step" id="sugarStep">Step 1 of 3</p>
+      <h1 id="sugarTitle">Give fast sugar now</h1>
+      <p class="lede" id="sugarLede">Any one of these. About 15 grams of sugar.</p>
+      <ul class="foods">
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M10 8h20l-3 26H13Z" fill="#fff" stroke="#1B2430" stroke-width="2.5" stroke-linejoin="round"/><path d="M11.4 20h17.2L27 34H13Z" fill="#F2A93B"/></svg>
+          <div><b>Juice</b><span>half a cup (120 ml)</span></div>
+        </li>
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="6" width="18" height="29" rx="4" fill="#2F5BEA" stroke="#1B2430" stroke-width="2.5"/><rect x="11" y="15" width="18" height="9" fill="#fff"/><path d="M17 6V3h6" fill="none" stroke="#1B2430" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <div><b>Regular soda</b><span>half a cup, not diet</span></div>
+        </li>
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="13" cy="14" r="8" fill="#fff" stroke="#1B2430" stroke-width="2.5"/><circle cx="27" cy="16" r="8" fill="#fff" stroke="#1B2430" stroke-width="2.5"/><circle cx="19" cy="28" r="8" fill="#F2A93B" stroke="#1B2430" stroke-width="2.5"/></svg>
+          <div><b>Glucose tablets</b><span>3 to 4 tablets</span></div>
+        </li>
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="14" cy="14" rx="10" ry="7" transform="rotate(-35 14 14)" fill="#fff" stroke="#1B2430" stroke-width="2.5"/><path d="M21 20l13 14" stroke="#1B2430" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="14" cy="13" rx="6" ry="3.5" transform="rotate(-35 14 13)" fill="#F2A93B"/></svg>
+          <div><b>Sugar or honey</b><span>1 tablespoon</span></div>
+        </li>
+      </ul>
+      <p class="nots">Not diet drinks, and not chocolate: it works too slowly. Small children may need less.</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" data-go="timer"><span>They've had it<small>Start the 15-minute timer</small></span> <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13h15M13.5 6l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="screen" data-name="timer" hidden>
+    <div class="body">
+      <p class="step" style="text-align:center">Step 2 of 3 · Wait</p>
+      <div class="ringwrap">
+        <div class="pulse" aria-hidden="true"></div>
+        <div class="pulse two" aria-hidden="true"></div>
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="track" cx="100" cy="100" r="92"/>
+          <circle class="fill" id="ringFill" cx="100" cy="100" r="92"/>
+        </svg>
+        <div class="clock" role="timer" aria-live="off"><b id="clock">15:00</b><span>until you check</span></div>
+      </div>
+      <div class="calm" aria-live="polite">
+        <h2 id="calmTitle">Stay with them</h2>
+        <p id="calmText">Have them sit down. The sugar needs time to work.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn ghost" data-go="check">They feel better already</button>
+      <button type="button" class="btn ghost" data-go="emergency">They're getting worse</button>
+    </div>
+    <p class="foot" style="text-align:center">Keep this screen open. It will buzz when the time is up.</p>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="screen" data-name="check" hidden>
+    <div class="body">
+      <p class="step">Step 3 of 3</p>
+      <h1>Check their blood sugar</h1>
+      <p class="lede">Ask them to check with their meter or sensor. No way to check? Go by how they feel.</p>
+      <p class="note">In range means above 70 mg/dL (about 4 mmol/L).</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" data-go="done">Back in range, or feeling better <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13.5l5.5 5.5L21 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="btn ghost" data-go="again">Still low, or no better</button>
+    </div>
+  </section>
+
+  <!-- Done -->
+  <section class="screen" data-name="done" hidden>
+    <div class="body">
+      <svg class="tick" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="40" fill="#2F5BEA"/><path d="M25 43l12 12 23-25" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h1>Well done. Now a snack.</h1>
+      <p class="lede">The fast sugar wears off quickly, so they need something that lasts.</p>
+      <ul class="after">
+        <li><b>Give a snack with carbs and protein</b>A sandwich, crackers with cheese or peanut butter, or a glass of milk. Skip this if a meal is coming soon.</li>
+        <li><b>Stay a little longer</b>They may feel tired, shaky or have a headache for a while.</li>
+        <li><b>No driving yet</b>They should wait until they feel fully back to normal.</li>
+      </ul>
+    </div>
+    <div class="actions">
+      <a class="btn" href="index.html">Back to the explainer</a>
+      <button type="button" class="btn ghost" data-go="start">Start again</button>
+    </div>
+  </section>
+
+  <!-- Emergency -->
+  <section class="screen" data-name="emergency" hidden>
+    <div class="body">
+      <p class="step">Emergency</p>
+      <h1>Call for help now</h1>
+      <a class="btn call" id="callBtn" href="tel:112">Call 112 <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M8 3h4l2 6-3 2a13 13 0 0 0 6 6l2-3 6 2v4a3 3 0 0 1-3 3A20 20 0 0 1 5 6a3 3 0 0 1 3-3Z" fill="currentColor"/></svg></a>
+      <p class="note" id="callNote">Or your local emergency number. Say “diabetic, unconscious”.</p>
+      <ol class="todo">
+        <li><div><b>Nothing in their mouth</b>No food, no drink. They could choke.</div></li>
+        <li><div><b>Lay them on their side</b>Top knee bent, head tilted back a little so they can breathe.
+          <svg class="side" viewBox="0 0 250 100" aria-hidden="true">
+            <line x1="8" y1="92" x2="242" y2="92" stroke="#36404F" stroke-width="3" stroke-linecap="round"/>
+            <path d="M150 52H232" stroke="#fff" stroke-width="17" stroke-linecap="round"/>
+            <path d="M148 56l34 26h40" fill="none" stroke="#F2A93B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M66 50H148" stroke="#fff" stroke-width="30" stroke-linecap="round"/>
+            <path d="M84 56l20 26H70" fill="none" stroke="#F2A93B" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="36" cy="54" r="17" fill="#fff"/>
+          </svg>
+        </div></li>
+        <li><div><b>Give glucagon, if you know how</b>Many people with diabetes carry it as a nasal spray or injection. Check their bag.</div></li>
+        <li><div><b>Stay until help arrives</b>If they wake up and can swallow, give fast sugar.</div></li>
+      </ol>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn ghost" data-go="sugar">They're awake and can swallow</button>
+    </div>
+  </section>
+  </main>
+</div>
+
+<script>
+(() => {
+  const KEY = "low-helper";
+  const demo = new URLSearchParams(location.search).has("demo");   // ?demo runs a 20-second timer
+  const WAIT = (demo ? 20 : 15 * 60) * 1000;
+  const RING = 2 * Math.PI * 92;
+
+  const screens = [...document.querySelectorAll(".screen")];
+  const theme = document.querySelector('meta[name="theme-color"]');
+  const THEME = { start: "#FFFFFF", sugar: "#F2A93B", timer: "#0E1633", check: "#2F5BEA", done: "#EEF3FF", emergency: "#1B2430" };
+  const ringFill = document.getElementById("ringFill");
+  const clock = document.getElementById("clock");
+  ringFill.style.strokeDasharray = RING;
+
+  let state = { screen: "start", endAt: 0, round: 1 };
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } };
+
+  /* ---------- Sound, vibration, keeping the screen on ---------- */
+  let audio = null, lock = null;
+  const primeAudio = () => {
+    try { audio = audio || new (window.AudioContext || window.webkitAudioContext)(); if (audio.state === "suspended") audio.resume(); } catch (e) {}
+  };
+  const chime = () => {
+    try { navigator.vibrate && navigator.vibrate([400, 150, 400, 150, 400]); } catch (e) {}
+    if (!audio) return;
+    [0, 0.45, 0.9].forEach((at, i) => {
+      const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime + at;
+      o.type = "sine"; o.frequency.value = i === 2 ? 880 : 660;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.4, t + 0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.38);
+      o.connect(g).connect(audio.destination); o.start(t); o.stop(t + 0.4);
+    });
+  };
+  const keepAwake = async on => {
+    try {
+      if (on && "wakeLock" in navigator && !lock) { lock = await navigator.wakeLock.request("screen"); lock.addEventListener("release", () => { lock = null; }); }
+      if (!on && lock) { await lock.release(); lock = null; }
+    } catch (e) { lock = null; }
+  };
+
+  /* ---------- Timer ---------- */
+  const calm = [
+    ["Stay with them", "Have them sit down. The sugar needs time to work."],
+    ["This is normal", "It can take 10 to 15 minutes before they feel better."],
+    ["Keep them still", "No walking it off. Resting helps the sugar do its job."],
+    ["Keep talking", "Ask simple questions. If they stop making sense, tap “They're getting worse”."],
+    ["Nearly there", "When the timer ends, they'll check their blood sugar again."]
+  ];
+  let tick = null, calmShown = -1;
+  const calmTitle = document.getElementById("calmTitle"), calmText = document.getElementById("calmText");
+
+  function drawTimer() {
+    const left = Math.max(0, state.endAt - Date.now());
+    const secs = Math.ceil(left / 1000);
+    clock.textContent = Math.floor(secs / 60) + ":" + String(secs % 60).padStart(2, "0");
+    ringFill.style.strokeDashoffset = RING * (left / WAIT);
+    document.title = (left > 0 ? clock.textContent + " · " : "") + "Low helper";
+    const i = Math.min(calm.length - 1, Math.floor((1 - left / WAIT) * calm.length));
+    if (i !== calmShown) {
+      calmShown = i;
+      calmTitle.textContent = calm[i][0]; calmText.textContent = calm[i][1];
+      calmTitle.parentElement.classList.remove("fade"); void calmTitle.offsetWidth; calmTitle.parentElement.classList.add("fade");
+    }
+    if (left <= 0) { chime(); go("check"); }
+  }
+  function startTimer(fresh) {
+    if (fresh) state.endAt = Date.now() + WAIT;
+    calmShown = -1;
+    clearInterval(tick);
+    drawTimer();
+    if (state.screen === "timer") tick = setInterval(drawTimer, 250);
+    keepAwake(true);
+  }
+  function stopTimer() { clearInterval(tick); tick = null; keepAwake(false); document.title = "Low helper · Type 1, explained"; }
+
+  /* ---------- Moving between screens ---------- */
+  function go(name, opts = {}) {
+    if (name === "again") { state.round += 1; name = "sugar"; }
+    if (name === "start") state.round = 1;
+    const leavingTimer = state.screen === "timer" && name !== "timer";
+    state.screen = name;
+    if (leavingTimer) stopTimer();
+
+    screens.forEach(s => { s.hidden = s.dataset.name !== name; });
+    document.body.dataset.screen = name;
+    theme.setAttribute("content", THEME[name]);
+
+    if (name === "sugar") {
+      const r = state.round;
+      document.getElementById("sugarStep").textContent = r === 1 ? "Step 1 of 3" : "Round " + r;
+      document.getElementById("sugarTitle").textContent = r === 1 ? "Give fast sugar now" : "Give the same again";
+      document.getElementById("sugarLede").textContent = r >= 3
+        ? "This is round " + r + ". If they are not improving, call emergency services now."
+        : r === 2 ? "Another 15 grams. Any one of these, then wait again."
+        : "Any one of these. About 15 grams of sugar.";
+    }
+    if (name === "timer") startTimer(!opts.resume);
+    save();
+    if (!opts.quiet) {
+      window.scrollTo(0, 0);
+      const h = document.querySelector('.screen[data-name="' + name + '"] h1, .screen[data-name="' + name + '"] .step');
+      if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+    }
+  }
+
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-go]");
+    if (!b) return;
+    primeAudio();
+    go(b.dataset.go);
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && state.screen === "timer") { drawTimer(); keepAwake(true); }
+  });
+
+  /* ---------- Emergency number, guessed from the device's region ---------- */
+  (() => {
+    let tz = "", num = "112";
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
+    const lang = (navigator.language || "").toUpperCase();
+    if (/^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Toronto|Vancouver|Edmonton|Winnipeg|Halifax|Detroit|Boise|Indiana|Kentucky)|Pacific\/Honolulu)/.test(tz)) num = "911";
+    else if (tz === "Europe/London" || /-GB$/.test(lang)) num = "999";
+    else if (/^Australia\//.test(tz)) num = "000";
+    else if (tz === "Pacific/Auckland") num = "111";
+    const a = document.getElementById("callBtn");
+    a.href = "tel:" + num;
+    a.firstChild.textContent = "Call " + num + " ";
+  })();
+
+  /* ---------- Pick up where we left off ---------- */
+  const saved = load();
+  if (saved && saved.screen === "timer" && saved.endAt) {
+    state = saved;
+    if (saved.endAt > Date.now()) go("timer", { resume: true, quiet: true });
+    else if (Date.now() - saved.endAt < 60 * 60 * 1000) go("check", { quiet: true });
+    else go("start", { quiet: true });
+  } else if (saved && ["sugar", "check"].includes(saved.screen)) {
+    state = saved; go(saved.screen, { quiet: true });
+  }
+
+  /* ---------- Work offline ---------- */
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+  }
+})();
+</script>
+</body>
+</html>

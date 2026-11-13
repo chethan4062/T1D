@@ -175,6 +175,16 @@
   footer p { max-width: 640px; }
 
 
+  .helper-link {
+    margin-top: 12px; max-width: 980px;
+    display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center;
+    background: var(--amber); color: var(--ink); text-decoration: none;
+    border-radius: 22px; padding: 20px 28px; font-size: 1.0625rem;
+    transition: filter .2s;
+  }
+  .helper-link:hover { filter: brightness(0.96); }
+  .helper-link b { font-family: var(--display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; margin-right: 4px; }
+
   /* Sources */
   .sources { margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--line); font-size: 0.975rem; color: var(--muted); }
   .sources h2 { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 8px; }
@@ -489,6 +499,10 @@
         <p><strong>Don't give food or drink.</strong> Lay them on their side and call emergency services. If they carry glucagon and you know how to give it, use it.</p>
       </div>
     </div>
+    <a class="helper-link" href="low-helper.html">
+      <span><b>Happening right now?</b> Open the Low helper. It walks you through each step and runs the 15-minute timer.</span>
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13h15M13.5 6l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </section>
 
   <section class="part">
