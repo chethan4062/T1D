@@ -1,0 +1,14 @@
+{
+  "name": "Low helper",
+  "short_name": "Low helper",
+  "description": "What to do when someone with diabetes is having a low, one step at a time.",
+  "start_url": "low-helper.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#F2A93B",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
