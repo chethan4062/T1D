@@ -1,0 +1,17 @@
+<header class="site-header{% if headerClass %} {{ headerClass }}{% endif %}">
+  <div class="wrap">
+    <a class="site-brand" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8.5" fill="none" stroke-width="3"/></svg>
+      {{ site.name }}
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      {%- for item in nav.main %}
+      <a href="{{ item.href }}"{% if item.section == section %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {%- endfor %}
+    </nav>
+    <a class="help-now" href="{{ nav.help.href }}">{{ nav.help.label }}</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>

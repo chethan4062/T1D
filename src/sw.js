@@ -1,6 +1,12 @@
 // Lets the Low helper open with no connection. Other pages are left alone.
-const CACHE = "low-helper-v2";
-const SHELL = ["low-helper.html", "disclaimer.html", "low-helper.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
+const CACHE = "low-helper-v3";
+// Paths are relative to this file
+const SHELL = [
+  "low-helper.html", "low-helper.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png",
+  "assets/css/base.css", "assets/css/low-helper.css", "assets/js/low-helper.js",
+  "disclaimer.html", "assets/css/disclaimer.css", "assets/js/site.js"
+];
+const ROOT = new URL("./", self.location).pathname;
 const FONT_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
 self.addEventListener("install", event => {
@@ -32,7 +38,7 @@ self.addEventListener("fetch", event => {
 
   // The helper's own files: answer from the saved copy at once, so a weak signal never
   // holds it up, and fetch the latest in the background for next time
-  const file = url.pathname.split("/").pop();
+  const file = url.pathname.startsWith(ROOT) ? url.pathname.slice(ROOT.length) : null;
   if (url.origin === location.origin && SHELL.includes(file)) {
     event.respondWith(
       caches.open(CACHE).then(cache =>
