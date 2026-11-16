@@ -48,7 +48,11 @@ html { -webkit-text-size-adjust: 100%; }
 @media (max-width: 860px) {
   .site-header { font-size: 0.95rem; }
   .site-header .wrap { padding-top: 14px; gap: 10px; }
-  .site-header .help-now { padding: 8px 14px; font-size: 0.85rem; }
+  .site-brand { min-height: 44px; }
+  .site-header .help-now { display: inline-flex; align-items: center; min-height: 42px; padding: 8px 16px; font-size: 0.85rem; }
+  .menu-toggle { width: 44px; height: 44px; }
+  .site-footer nav { gap: 0 22px; padding-top: 8px; }
+  .site-footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
 
   /* With scripting: the links fold into a panel behind the menu button */
   .js .menu-toggle { display: grid; }

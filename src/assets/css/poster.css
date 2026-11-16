@@ -7,7 +7,7 @@ a { color: var(--blue); }
 
 /* One A4 page */
 .sheet { width: 210mm; max-width: 100%; aspect-ratio: 210 / 297; margin: 0 auto 32px; background: #fff; padding: 7% 8% 6%; display: flex; flex-direction: column; container-type: inline-size; }
-.brand { font-family: var(--display); font-weight: 600; font-size: 2.1cqw; display: flex; align-items: center; gap: 1.2cqw; }
+.brand { font-family: var(--display); font-weight: 600; font-size: 2.3cqw; display: flex; align-items: center; gap: 1.2cqw; }
 .brand svg { width: 2.8cqw; height: 2.8cqw; }
 h1 { font-family: var(--display); font-weight: 800; font-size: 9.4cqw; line-height: 0.98; letter-spacing: -0.03em; margin: 5cqw 0 2.4cqw; }
 .lede { font-size: 3.1cqw; line-height: 1.35; color: var(--muted); margin: 0; max-width: 30em; }
@@ -21,13 +21,22 @@ h1 { font-family: var(--display); font-weight: 800; font-size: 9.4cqw; line-heig
 .urgent { margin-top: 3.6cqw; background: var(--ink); color: #fff; border-radius: 2.6cqw; padding: 2.6cqw 3.2cqw; font-size: 2.45cqw; line-height: 1.4; }
 .urgent b { font-family: var(--display); font-weight: 800; font-size: 2.8cqw; display: block; margin-bottom: 0.4cqw; }
 .urgent span { color: #D6DBE4; }
-.foot { margin-top: auto; padding-top: 3cqw; font-size: 1.85cqw; line-height: 1.4; color: var(--muted); display: flex; justify-content: space-between; gap: 4cqw; align-items: end; }
+.foot { margin-top: auto; padding-top: 3cqw; font-size: 2.1cqw; line-height: 1.4; color: var(--muted); display: flex; justify-content: space-between; gap: 4cqw; align-items: end; }
 .foot b { font-family: var(--display); font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+.bar .swipe { display: none; }
+.bar a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 640px) {
+  .paper { overflow-x: auto; padding: 0 16px; }
+  .sheet { width: 600px; max-width: none; }
+  .bar .swipe { display: block; color: var(--ink); }
+}
 
 @page { size: A4; margin: 0; }
 @media print {
   body { background: #fff; }
   .bar { display: none; }
+  .paper { overflow: visible; padding: 0; }
   .sheet { width: 210mm; height: 297mm; max-width: none; margin: 0; }
   .urgent, .ts b { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }

@@ -38,7 +38,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   font-family: var(--display); font-weight: 600; font-size: 0.95rem;
   min-height: 48px;
 }
-.bar a { text-decoration: none; display: inline-flex; align-items: center; gap: 9px; }
+.bar a { text-decoration: none; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; }
 .bar a circle { stroke: currentColor; }
 .sos {
   font-size: 0.95rem; font-weight: 600;
