@@ -1,0 +1,14 @@
+{
+  "name": "type-1-explained",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Type 1, explained: a plain-language site about type 1 diabetes.",
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}
