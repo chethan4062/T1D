@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "build": "eleventy",
-    "start": "eleventy --serve"
+    "start": "eleventy --serve",
+    "check": "node scripts/check-site.mjs",
+    "test": "npm run build && npm run check"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2"
