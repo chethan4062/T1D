@@ -1,10 +1,10 @@
 ---
 layout: "base.njk"
-permalink: "disclaimer.html"
+permalink: "about/disclaimer/index.html"
 title: "Disclaimer · Type 1, explained"
 description: "What this site is, what it is not, and the limits of the information and tools on it."
 section: "about"
-css: ["disclaimer.css"]
+css: ["article.css"]
 ---
 {% include "header.njk" %}
 <div class="wrap">
@@ -23,7 +23,7 @@ css: ["disclaimer.css"]
     <p>Always ask a qualified health professional about your own health or the health of someone in your care. Never ignore professional advice, or delay getting it, because of something you read here.</p>
 
     <h2>Not reviewed by a medical professional</h2>
-    <p>This site was written by people who are not doctors. Its facts were checked against published guidance from the organisations listed under <a href="index.html#sources">Sources</a>, but the site itself has not been reviewed or approved by a medical professional or by any of those organisations.</p>
+    <p>This site was written by people who are not doctors. Its facts were checked against published guidance from the organisations listed under <a href="{{ '/about/sources/' | url }}">Sources</a>, but the site itself has not been reviewed or approved by a medical professional or by any of those organisations.</p>
 
     <h2>Advice differs between people and countries</h2>
     <p>Diabetes care is individual. Targets, doses and the right response to low blood sugar vary from person to person, are different for young children, and differ a little between countries. If a person has their own care plan or instructions from their care team, follow those instead of this site.</p>

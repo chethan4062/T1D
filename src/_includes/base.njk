@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="{{ site.lang }}" class="no-js">
+<html lang="{{ site.lang }}" class="no-js" data-root="{{ '/' | url }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="{{ viewport or 'width=device-width, initial-scale=1' }}">
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-{%- if icon %}
-<link rel="icon" href="{{ icon }}">
+{%- if app %}
+<link rel="icon" href="{{ '/icon-192.png' | url }}">
 {%- else %}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='8' fill='white' stroke='%232F5BEA' stroke-width='3.5'/%3E%3C/svg%3E">
 {%- endif %}
@@ -24,25 +24,29 @@
 <meta name="twitter:title" content="{{ shareTitle or title }}">
 <meta name="twitter:description" content="{{ shareDescription or description }}">
 <meta name="twitter:image" content="{{ site.url }}/{{ shareImage or site.defaultShareImage }}">
-{%- if headExtra %}
-{{ headExtra | safe }}
+{%- if app %}
+<meta name="theme-color" content="#FFFFFF">
+<link rel="manifest" href="{{ '/low-helper.webmanifest' | url }}">
+<link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | url }}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Low helper">
 {%- endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="{{ '/assets/css/base.css' | url }}">
 {%- for file in css %}
-<link rel="stylesheet" href="assets/css/{{ file }}">
+<link rel="stylesheet" href="{{ ('/assets/css/' + file) | url }}">
 {%- endfor %}
 <script>document.documentElement.className = "js";</script>
 </head>
 <body{% if bodyAttrs %} {{ bodyAttrs | safe }}{% endif %}>
 {{ content | safe }}
 {%- if siteScript != false %}
-<script src="assets/js/site.js"></script>
+<script src="{{ '/assets/js/site.js' | url }}"></script>
 {%- endif %}
 {%- for file in js %}
-<script src="assets/js/{{ file }}"></script>
+<script src="{{ ('/assets/js/' + file) | url }}"></script>
 {%- endfor %}
 </body>
 </html>

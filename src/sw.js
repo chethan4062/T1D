@@ -1,10 +1,12 @@
 // Lets the Low helper open with no connection. Other pages are left alone.
-const CACHE = "low-helper-v3";
+const CACHE = "low-helper-v4";
 // Paths are relative to this file
 const SHELL = [
-  "low-helper.html", "low-helper.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png",
+  "tools/low-helper/", "low-helper.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png",
   "assets/css/base.css", "assets/css/low-helper.css", "assets/js/low-helper.js",
-  "disclaimer.html", "assets/css/disclaimer.css", "assets/js/site.js"
+  "about/disclaimer/", "assets/css/article.css", "assets/js/site.js",
+  // the helper's old address, which forwards to the new one
+  "low-helper.html"
 ];
 const ROOT = new URL("./", self.location).pathname;
 const FONT_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];

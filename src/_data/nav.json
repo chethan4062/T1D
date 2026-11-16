@@ -1,17 +1,53 @@
 {
   "main": [
-    { "label": "Understand", "href": "index.html", "section": "understand" },
-    { "label": "Spot the signs", "href": "spot-it-in-time.html", "section": "signs" },
-    { "label": "Living with it", "href": "below-the-surface.html", "section": "living" }
+    {
+      "label": "Understand",
+      "href": "/",
+      "section": "understand"
+    },
+    {
+      "label": "Spot the signs",
+      "href": "/signs/spot-it-in-time/",
+      "section": "signs"
+    },
+    {
+      "label": "Living with it",
+      "href": "/living/below-the-surface/",
+      "section": "living"
+    }
   ],
-  "help": { "label": "Low helper", "href": "low-helper.html" },
+  "help": {
+    "label": "Low helper",
+    "href": "/tools/low-helper/"
+  },
   "footer": [
-    { "label": "Understand type 1", "href": "index.html" },
-    { "label": "Spot the signs", "href": "spot-it-in-time.html" },
-    { "label": "Poster", "href": "poster.html" },
-    { "label": "Living with it", "href": "below-the-surface.html" },
-    { "label": "Low helper", "href": "low-helper.html" },
-    { "label": "Sources", "href": "index.html#sources" },
-    { "label": "Disclaimer", "href": "disclaimer.html" }
+    {
+      "label": "Understand type 1",
+      "href": "/"
+    },
+    {
+      "label": "Spot the signs",
+      "href": "/signs/spot-it-in-time/"
+    },
+    {
+      "label": "Poster",
+      "href": "/signs/poster/"
+    },
+    {
+      "label": "Living with it",
+      "href": "/living/below-the-surface/"
+    },
+    {
+      "label": "Low helper",
+      "href": "/tools/low-helper/"
+    },
+    {
+      "label": "Sources",
+      "href": "/about/sources/"
+    },
+    {
+      "label": "Disclaimer",
+      "href": "/about/disclaimer/"
+    }
   ]
 }

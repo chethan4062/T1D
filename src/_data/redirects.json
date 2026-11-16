@@ -1,0 +1,38 @@
+[
+  {
+    "from": "spot-it-in-time.html",
+    "to": "/signs/spot-it-in-time/"
+  },
+  {
+    "from": "poster.html",
+    "to": "/signs/poster/"
+  },
+  {
+    "from": "below-the-surface.html",
+    "to": "/living/below-the-surface/"
+  },
+  {
+    "from": "low-helper.html",
+    "to": "/tools/low-helper/"
+  },
+  {
+    "from": "disclaimer.html",
+    "to": "/about/disclaimer/"
+  },
+  {
+    "from": "signs/index.html",
+    "to": "/signs/spot-it-in-time/"
+  },
+  {
+    "from": "living/index.html",
+    "to": "/living/below-the-surface/"
+  },
+  {
+    "from": "tools/index.html",
+    "to": "/tools/low-helper/"
+  },
+  {
+    "from": "about/index.html",
+    "to": "/about/sources/"
+  }
+]
