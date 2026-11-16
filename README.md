@@ -17,6 +17,17 @@ npm start       # then open the address it prints
 
 `npm run build` builds the site without starting a preview.
 
+## Checks
+
+`npm test` builds the site and then runs `scripts/check-site.mjs`, which fails if:
+
+- a link, stylesheet, script or image leads nowhere, or a `#link` points to a part of a page that does not exist
+- a page has no title, description, main heading or share-preview tags, or two pages share a title
+- the sitemap is out of step with the pages
+- a file the Low helper saves for offline use is missing
+
+The same check runs on every pull request and again before each publish, so a broken build never goes live.
+
 ## Where things live
 
 ```
@@ -40,6 +51,10 @@ src/
     js/site.js       the menu button
     js/<page>.js     the animation or tool on one page
   sw.js              lets the Low helper open offline
+  sitemap.njk        builds sitemap.xml from the list of pages
+  404.njk            the "page not found" page
+scripts/
+  check-site.mjs     checks the built site (see Checks above)
 ```
 
 Each page file starts with a settings block (title, description, address, stylesheets, scripts) followed by its content.

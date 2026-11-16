@@ -23,7 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build
+      # Builds the site, then checks it for broken links and missing page details
+      - run: npm test
       - if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:

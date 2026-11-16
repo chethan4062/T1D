@@ -1,0 +1,35 @@
+---
+layout: "base.njk"
+permalink: "404.html"
+title: "Page not found · Type 1, explained"
+description: "That page does not exist. Here is where to find everything on the site."
+section: "none"
+css: ["article.css"]
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{% include "header.njk" %}
+<div class="wrap">
+
+  <main>
+    <h1>Page not found</h1>
+    <p class="lede">There is nothing at this address. The page may have moved, or the link may be mistyped.</p>
+
+    <div class="urgent">
+      <b>Is someone having a low right now?</b>
+      <p><a href="{{ '/tools/low-helper/' | url }}" style="color: #fff;">Open the Low helper</a>. It walks you through each step.</p>
+    </div>
+
+    <h2>Everything on this site</h2>
+    <ul>
+      <li><a href="{{ '/' | url }}">Type 1, explained</a>: what it is and how insulin works, in about three minutes</li>
+      <li><a href="{{ '/signs/spot-it-in-time/' | url }}">Spot it in time</a>: a one-minute film of the four early signs</li>
+      <li><a href="{{ '/signs/poster/' | url }}">The four signs poster</a>, to print</li>
+      <li><a href="{{ '/living/below-the-surface/' | url }}">Below the surface</a>: the hidden daily work of living with type 1</li>
+      <li><a href="{{ '/tools/low-helper/' | url }}">Low helper</a>: what to do when someone is having a low</li>
+      <li><a href="{{ '/about/sources/' | url }}">Sources</a> and <a href="{{ '/about/disclaimer/' | url }}">disclaimer</a></li>
+    </ul>
+  </main>
+
+  {% include "footer.njk" %}
+</div>

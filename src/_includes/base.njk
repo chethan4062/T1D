@@ -6,6 +6,9 @@
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+{%- if noindex %}
+<meta name="robots" content="noindex">
+{%- endif %}
 {%- if app %}
 <link rel="icon" href="{{ '/icon-192.png' | url }}">
 {%- else %}
