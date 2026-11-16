@@ -1,0 +1,22 @@
+---
+pagination:
+  data: redirects
+  size: 1
+  alias: redirect
+permalink: "{{ redirect.from }}"
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>This page has moved · {{ site.name }}</title>
+<link rel="canonical" href="{{ site.url }}{{ redirect.to }}">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ redirect.to | url }}">
+<script>location.replace("{{ redirect.to | url }}" + location.search + location.hash);</script>
+</head>
+<body>
+<p>This page has moved. <a href="{{ redirect.to | url }}">Continue to the new page</a>.</p>
+</body>
+</html>

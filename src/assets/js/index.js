@@ -1,3 +1,6 @@
+// Old links to the sources list on this page now go to the sources page
+if (location.hash === "#sources") location.replace(document.documentElement.dataset.root + "about/sources/");
+
 (() => {
   const NS = "http://www.w3.org/2000/svg";
   const svg = document.getElementById("scene");

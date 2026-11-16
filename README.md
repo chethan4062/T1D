@@ -21,7 +21,9 @@ npm start       # then open the address it prints
 
 ```
 src/
-  *.njk              one file per page: its settings at the top, then its content
+  index.njk                      the home page
+  signs/, living/, tools/, about/   one folder per section, one .njk file per page
+  redirects.njk                  builds a forwarding page for every entry in _data/redirects.json
   _includes/
     base.njk         the page shell: title, share-preview tags, fonts, stylesheets, scripts
     header.njk       the header and menu
@@ -29,26 +31,38 @@ src/
   _data/
     site.json        site name and address
     nav.json         the links in the menu and footer
+    sources.json     the sources list and the date it was last checked
+    redirects.json   old addresses and where they now go
   assets/
     css/base.css     colours, fonts, header and footer, shared by every page
+    css/article.css  plain text pages (sources, disclaimer)
     css/<page>.css   styles for one page
     js/site.js       the menu button
     js/<page>.js     the animation or tool on one page
   sw.js              lets the Low helper open offline
 ```
 
-To add a page, create `src/<name>.njk` with the same settings block as an existing page, and add it to `src/_data/nav.json` if it belongs in the menu or footer.
+Each page file starts with a settings block (title, description, address, stylesheets, scripts) followed by its content.
 
-## Pages
+## Pages and addresses
 
-| Page | What it is |
-|---|---|
-| `index.njk` | The explainer: how insulin works, the video, myths, a day with type 1, what to do in a low, the four signs, sources |
-| `spot-it-in-time.njk` | A one-minute animated film of the four early signs. Add `?t=30` to the address to open it paused at 30 seconds |
-| `poster.njk` | A printable one-page poster of the four signs |
-| `below-the-surface.njk` | A scroll-driven story of the hidden daily work of living with type 1 |
-| `low-helper.njk` | A step-by-step guide for treating a low, with a 15-minute timer. Works offline after the first visit and can be added to a phone's home screen. Add `?demo` for a 20-second timer |
-| `disclaimer.njk` | What the site is and is not |
+| Address | File | What it is |
+|---|---|---|
+| `/` | `index.njk` | The explainer: how insulin works, the video, myths, a day with type 1, what to do in a low, the four signs |
+| `/signs/spot-it-in-time/` | `signs/spot-it-in-time.njk` | A one-minute animated film of the four early signs. Add `?t=30` to open it paused at 30 seconds |
+| `/signs/poster/` | `signs/poster.njk` | A printable one-page poster of the four signs |
+| `/living/below-the-surface/` | `living/below-the-surface.njk` | A scroll-driven story of the hidden daily work of living with type 1 |
+| `/tools/low-helper/` | `tools/low-helper.njk` | A step-by-step guide for treating a low, with a 15-minute timer. Works offline after the first visit and can be added to a phone's home screen. Add `?demo` for a 20-second timer |
+| `/about/sources/` | `about/sources.njk` | The guidance the site was checked against, from `_data/sources.json` |
+| `/about/disclaimer/` | `about/disclaimer.njk` | What the site is and is not |
+
+The addresses the pages had before (`spot-it-in-time.html`, `low-helper.html` and so on) forward to the new ones. So do the section addresses (`/signs/`, `/living/`, `/tools/`, `/about/`), which go to each section's main page until a section has enough pages to need its own front page.
+
+## Adding or moving a page
+
+- **Add:** create a `.njk` file in the right section folder with the same settings block as an existing page. Add it to `_data/nav.json` if it belongs in the menu or footer.
+- **Link to a page:** write the address through the `url` filter, like `{{ '/about/sources/' | url }}`, so it works wherever the site is hosted.
+- **Move:** change the page's `permalink`, then add the old address to `_data/redirects.json` so existing links keep working.
 
 The Low helper and the poster keep their own simple top bar instead of the site menu: one is used in an emergency and the other is made to be printed.
 

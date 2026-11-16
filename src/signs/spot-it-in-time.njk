@@ -1,6 +1,6 @@
 ---
 layout: "base.njk"
-permalink: "spot-it-in-time.html"
+permalink: "signs/spot-it-in-time/index.html"
 title: "Spot it in time · Type 1, explained"
 description: "A one-minute animated film about the four early signs of type 1 diabetes: toilet, thirsty, tired, thinner."
 section: "signs"
@@ -72,7 +72,7 @@ js: ["spot-it-in-time.js"]
           <p class="urgent"><b>Go to emergency care now if they also</b><span>are being sick, have tummy pain, are breathing fast and deep, have breath that smells fruity, or are very sleepy or confused.</span></p>
           <div class="row" id="endRow" hidden>
             <button type="button" class="pill" data-replay>Watch again</button>
-            <a class="pill ghost" href="poster.html">Print the poster</a>
+            <a class="pill ghost" href="{{ '/signs/poster/' | url }}">Print the poster</a>
           </div>
         </div>
       </div>
@@ -99,9 +99,9 @@ js: ["spot-it-in-time.js"]
     </div>
     <p class="urgent"><b>Go to emergency care now if they also</b><span>are being sick, have tummy pain, are breathing fast and deep, have breath that smells fruity, or are very sleepy or confused. These can be signs of diabetic ketoacidosis, which is life-threatening and needs hospital treatment.</span></p>
     <div class="row">
-      <a class="primary" href="poster.html">Print the poster</a>
-      <a href="index.html">Back to the explainer</a>
-      <a href="low-helper.html">Low helper</a>
+      <a class="primary" href="{{ '/signs/poster/' | url }}">Print the poster</a>
+      <a href="{{ '/' | url }}">Back to the explainer</a>
+      <a href="{{ '/tools/low-helper/' | url }}">Low helper</a>
     </div>
   </section>
   {% set footnote %}The home in this film is made up. This page is general information, not medical advice. If you are worried about someone, see a doctor today.{% endset %}

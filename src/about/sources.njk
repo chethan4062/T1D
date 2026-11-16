@@ -1,0 +1,28 @@
+---
+layout: "base.njk"
+permalink: "about/sources/index.html"
+title: "Sources · Type 1, explained"
+description: "The published guidance the facts on this site were checked against."
+section: "about"
+css: ["article.css"]
+---
+{% include "header.njk" %}
+<div class="wrap">
+
+  <main>
+    <h1>Sources</h1>
+    <p class="lede">The facts on this site were last checked against these pages in {{ sources.lastChecked }}.</p>
+    <p>Advice differs a little between countries, so follow your own care team where it does. The site has not been reviewed by a medical professional; see the <a href="{{ '/about/disclaimer/' | url }}">disclaimer</a>.</p>
+
+    {%- for group in sources.groups %}
+    <h2>{{ group.title }}</h2>
+    <ul>
+      {%- for item in group.items %}
+      <li><a href="{{ item.url }}">{{ item.title }}</a>, {{ item.by }}{% if item.note %} ({{ item.note }}){% endif %}</li>
+      {%- endfor %}
+    </ul>
+    {%- endfor %}
+  </main>
+
+  {% include "footer.njk" %}
+</div>

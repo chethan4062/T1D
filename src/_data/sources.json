@@ -1,0 +1,72 @@
+{
+  "lastChecked": "November 2026",
+  "groups": [
+    {
+      "title": "What type 1 diabetes is",
+      "items": [
+        {
+          "title": "Type 1 diabetes",
+          "by": "NIDDK (US National Institutes of Health)",
+          "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/type-1-diabetes"
+        },
+        {
+          "title": "Diabetes basics",
+          "by": "CDC",
+          "url": "https://www.cdc.gov/diabetes/about/index.html"
+        }
+      ]
+    },
+    {
+      "title": "The early signs and getting diagnosed",
+      "items": [
+        {
+          "title": "Type 1 diabetes: symptoms and getting diagnosed",
+          "by": "NHS",
+          "url": "https://www.nhs.uk/conditions/type-1-diabetes/about-type-1-diabetes/symptoms-and-getting-diagnosed/"
+        },
+        {
+          "title": "The 4 Ts of type 1 diabetes",
+          "by": "Diabetes UK",
+          "url": "https://www.diabetes.org.uk/about-us/news-and-views/4ts-campaign"
+        },
+        {
+          "title": "Diabetic ketoacidosis",
+          "by": "NHS",
+          "url": "https://www.nhs.uk/conditions/diabetic-ketoacidosis/"
+        }
+      ]
+    },
+    {
+      "title": "Treating low blood sugar",
+      "items": [
+        {
+          "title": "Treatment of low blood sugar",
+          "by": "CDC",
+          "url": "https://www.cdc.gov/diabetes/treatment/treatment-low-blood-sugar-hypoglycemia.html"
+        },
+        {
+          "title": "Low blood sugar (hypoglycaemia)",
+          "by": "NHS",
+          "url": "https://www.nhs.uk/conditions/low-blood-sugar-hypoglycaemia/"
+        }
+      ]
+    },
+    {
+      "title": "Living with type 1",
+      "items": [
+        {
+          "title": "Clinical targets for continuous glucose monitoring data",
+          "by": "NIDDK",
+          "url": "https://www.niddk.nih.gov/health-information/professionals/diabetes-discoveries-practice/clinical-targets-for-continuous-glucose-monitoring-data",
+          "note": "the 70 to 180 mg/dL target range"
+        },
+        {
+          "title": "New research keeps diabetics safer during sleep",
+          "by": "Stanford Medicine, 2014",
+          "url": "https://med.stanford.edu/news/insights/2014/05/new-research-keeps-diabetics-safer-during-sleep.html",
+          "note": "the “about 180 decisions a day” figure"
+        }
+      ]
+    }
+  ]
+}

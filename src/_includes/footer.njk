@@ -4,7 +4,7 @@
   {%- endif %}
   <nav aria-label="Site">
     {%- for item in nav.footer %}
-    <a href="{{ item.href }}">{{ item.label }}</a>
+    <a href="{{ item.href | url }}">{{ item.label }}</a>
     {%- endfor %}
   </nav>
 </footer>

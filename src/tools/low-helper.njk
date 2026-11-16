@@ -1,6 +1,6 @@
 ---
 layout: "base.njk"
-permalink: "low-helper.html"
+permalink: "tools/low-helper/index.html"
 title: "Low helper · Type 1, explained"
 description: "A step-by-step guide to open when someone with diabetes is having a low. One clear step at a time, with a 15-minute timer."
 section: "tools"
@@ -12,14 +12,13 @@ shareImageAlt: "Low helper. A 15-minute countdown ring."
 js: ["low-helper.js"]
 bodyAttrs: "data-screen=\"start\""
 viewport: "width=device-width, initial-scale=1, viewport-fit=cover"
-icon: "icon-192.png"
 siteScript: false
-headExtra: "<meta name=\"theme-color\" content=\"#FFFFFF\">\n<link rel=\"manifest\" href=\"low-helper.webmanifest\">\n<link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\">\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n<meta name=\"apple-mobile-web-app-title\" content=\"Low helper\">"
+app: true
 ---
 <div class="app">
 
   <header class="bar">
-    <a href="index.html" aria-label="Type 1, explained: back to the explainer">
+    <a href="{{ '/' | url }}" aria-label="Type 1, explained: back to the explainer">
       <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8.5" fill="none" stroke-width="3"/></svg>
       Low helper
     </a>
@@ -125,7 +124,7 @@ headExtra: "<meta name=\"theme-color\" content=\"#FFFFFF\">\n<link rel=\"manifes
       </ul>
     </div>
     <div class="actions">
-      <a class="btn" href="index.html">Back to the explainer</a>
+      <a class="btn" href="{{ '/' | url }}">Back to the explainer</a>
       <button type="button" class="btn ghost" data-go="start">Start again</button>
     </div>
   </section>
@@ -157,5 +156,5 @@ headExtra: "<meta name=\"theme-color\" content=\"#FFFFFF\">\n<link rel=\"manifes
     </div>
   </section>
   </main>
-  <p class="legal">General information, not medical advice. <a href="disclaimer.html">Disclaimer</a> · <a href="index.html#sources">Sources</a></p>
+  <p class="legal">General information, not medical advice. <a href="{{ '/about/disclaimer/' | url }}">Disclaimer</a> · <a href="{{ '/about/sources/' | url }}">Sources</a></p>
 </div>
