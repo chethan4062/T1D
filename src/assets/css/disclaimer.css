@@ -1,0 +1,14 @@
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 1.1875rem; line-height: 1.65; }
+a { color: var(--blue); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 6vw, 3.75rem); line-height: 1.04; letter-spacing: -0.03em; margin: 56px 0 18px; }
+.lede { font-size: 1.3rem; line-height: 1.5; color: var(--muted); margin: 0 0 12px; }
+.urgent { margin: 32px 0 8px; background: var(--ink); color: #fff; border-radius: 22px; padding: 22px 26px; }
+.urgent b { font-family: var(--display); font-weight: 800; font-size: 1.25rem; display: block; margin-bottom: 4px; }
+.urgent p { margin: 0; color: #C9D0DC; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 1.35rem; letter-spacing: -0.01em; margin: 40px 0 8px; padding-top: 22px; border-top: 1px solid var(--line); }
+p { margin: 0 0 0.9em; }
+ul { margin: 0 0 0.9em; padding-left: 1.2em; }
+li { margin-bottom: 0.3em; }
+@media (max-width: 720px) { body { font-size: 1.0625rem; } h1 { margin-top: 36px; } }

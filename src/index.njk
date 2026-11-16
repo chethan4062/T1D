@@ -1,0 +1,262 @@
+---
+layout: "base.njk"
+permalink: "index.html"
+title: "Type 1 diabetes, simply explained"
+description: "A short, plain-language explainer of what type 1 diabetes is, how insulin works, and how people live with it."
+section: "understand"
+css: ["index.css"]
+shareTitle: "Type 1 diabetes, simply explained"
+shareDescription: "What type 1 diabetes is, how insulin works, and how people live with it. A plain-language explainer you can read in about three minutes."
+shareImage: "share-home.png"
+shareImageAlt: "Insulin is the key that lets sugar into your cells. A drawing of a body cell with insulin keys in its doors."
+js: ["index.js"]
+---
+{% include "header.njk" %}
+
+<div class="wrap">
+
+  <section class="hero">
+    <h1>Insulin is the key that lets sugar into your cells.</h1>
+    <p class="lede">In type 1 diabetes, the body stops making that key. Here's what that means, in about three minutes.</p>
+
+    <div class="demo" aria-label="Interactive illustration of how insulin works">
+      <div class="stage">
+        <svg id="scene" viewBox="0 0 800 340" role="img" aria-labelledby="scene-desc">
+          <desc id="scene-desc">Sugar molecules float in the bloodstream next to a cell. Insulin keys sit in the cell's doors and let the sugar in.</desc>
+          <defs>
+            <radialGradient id="cellGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFE7B8"/>
+              <stop offset="100%" stop-color="#FFFFFF"/>
+            </radialGradient>
+          </defs>
+          <g id="particles"></g>
+          <circle id="cell" cx="580" cy="168" r="112" fill="url(#cellGlow)" stroke="#1B2430" stroke-width="3"/>
+          <circle id="core" cx="580" cy="168" r="34" fill="#F2A93B" opacity="0.55"/>
+          <g id="doors"></g>
+          <text x="580" y="322" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="15" fill="#5F6878">a body cell</text>
+          <text x="34" y="322" font-family="Bricolage Grotesque, sans-serif" font-size="15" fill="#5F6878">bloodstream</text>
+        </svg>
+      </div>
+
+      <div class="controls" role="group" aria-label="Choose what to show">
+        <button type="button" data-mode="healthy" aria-pressed="true">Without diabetes</button>
+        <button type="button" data-mode="t1d" aria-pressed="false">With type 1</button>
+        <button type="button" data-mode="treated" aria-pressed="false">Type 1 + insulin</button>
+      </div>
+
+      <div class="readout">
+        <p class="caption" id="caption" aria-live="polite">The pancreas makes insulin. Insulin unlocks your cells, sugar moves in, and you get energy.</p>
+        <div class="meter" aria-hidden="true">
+          Blood sugar: <strong id="level">steady</strong>
+          <div class="bar"><div class="fill" id="fill"></div></div>
+        </div>
+      </div>
+
+      <div class="legend" aria-hidden="true">
+        <span><svg width="18" height="18" viewBox="-9 -9 18 18"><polygon points="7,0 3.5,6.06 -3.5,6.06 -7,0 -3.5,-6.06 3.5,-6.06" fill="#fff" stroke="#2F5BEA" stroke-width="2"/></svg>sugar (glucose)</span>
+        <span><svg width="22" height="14" viewBox="0 0 22 14"><circle cx="5" cy="7" r="4.5" fill="#F2A93B"/><rect x="8" y="5" width="13" height="4" rx="1.5" fill="#F2A93B"/><rect x="16" y="8" width="2.5" height="4" fill="#F2A93B"/></svg>insulin</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="video">
+    <h2>Watch: what happens inside the body</h2>
+    <p class="prose">A short video that follows type 1 from the body, to the pancreas, to the cells that make insulin.</p>
+    <div class="video">
+      <a class="video-poster" id="videoPoster" href="https://youtu.be/rkedyC3JNM4" data-id="rkedyC3JNM4">
+        <svg width="84" height="84" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="42" fill="#F2A93B"/><path d="M34 26v32l26-16Z" fill="#1B2430"/></svg>
+        <span class="t">What is type 1 diabetes?</span>
+        <span class="s">Play video · loads from YouTube</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="part prose">
+    <h2>So what is type 1 diabetes?</h2>
+    <p>Type 1 diabetes is an autoimmune condition. The body's immune system, which normally fights germs, mistakenly attacks the cells in the pancreas that make insulin.</p>
+    <p>Once those cells are gone, the body makes little or no insulin. Without it, sugar from food stays in the blood instead of fuelling the body. Over time, high blood sugar can harm the eyes, kidneys, nerves and heart, which is why it has to be managed every day.</p>
+    <p>Nobody knows exactly what triggers it. It isn't caused by eating too much sugar or by anything a person did, and it can't be prevented. It often starts in childhood or the teenage years, but it can appear at any age.</p>
+  </section>
+
+  <section class="part">
+    <h2>Type 1 isn't the same as type 2</h2>
+    <div class="compare">
+      <div>
+        <h3>Type 1</h3>
+        <p>The body makes little or no insulin. It's autoimmune, often starts young, and always needs insulin.</p>
+      </div>
+      <div>
+        <h3>Type 2</h3>
+        <p>The body still makes insulin but doesn't respond to it well. It's far more common, linked to genes and lifestyle, and is often managed with diet, exercise and tablets.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2>True or false?</h2>
+    <p class="prose">Tap a card to flip it. Most people get at least one of these wrong.</p>
+    <div class="myths">
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">1 of 6</span>
+        <span class="front"><span class="q">“Eating too much sugar causes type 1.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Type 1 is an autoimmune condition. Nothing a person ate or did causes it.</span><span class="tap">“Eating too much sugar causes type 1.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">2 of 6</span>
+        <span class="front"><span class="q">“People with type 1 can never eat sweets.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">They can eat sweets. They match the insulin they take to the food, the same job a pancreas does on its own.</span><span class="tap">“People with type 1 can never eat sweets.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">3 of 6</span>
+        <span class="front"><span class="q">“Kids grow out of it.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Type 1 is lifelong. The cells that make insulin don't come back.</span><span class="tap">“Kids grow out of it.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">4 of 6</span>
+        <span class="front"><span class="q">“You can catch it from someone.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Type 1 isn't contagious. It can't pass from one person to another.</span><span class="tap">“You can catch it from someone.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">5 of 6</span>
+        <span class="front"><span class="q">“Adults can get type 1 too.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict true">True.</span><span class="a">It often starts in childhood, but it can begin at any age. Many people are diagnosed as adults.</span><span class="tap">“Adults can get type 1 too.”</span></span>
+      </button>
+      <button type="button" class="myth" aria-pressed="false">
+        <span class="k">6 of 6</span>
+        <span class="front"><span class="q">“Insulin is a cure.”</span><span class="tap">Tap to flip</span></span>
+        <span class="back"><span class="verdict">False.</span><span class="a">Insulin keeps people with type 1 alive and well, but it's a daily treatment. There's no cure yet.</span><span class="tap">“Insulin is a cure.”</span></span>
+      </button>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2>Living with it</h2>
+    <p class="prose">There's no cure yet, but type 1 is very manageable. Day to day, it comes down to three things.</p>
+    <ul class="living">
+      <li>
+        <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="20" width="28" height="9" rx="4.5" fill="none" stroke="#1B2430" stroke-width="2.5"/><rect x="14" y="20" width="10" height="9" fill="#F2A93B"/><path d="M36 24.5h6" stroke="#1B2430" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div>
+          <h3>Taking insulin</h3>
+          <p>Several injections a day with an insulin pen, or a small pump worn on the body that delivers it automatically.</p>
+        </div>
+      </li>
+      <li>
+        <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="15" fill="none" stroke="#1B2430" stroke-width="2.5"/><circle cx="24" cy="24" r="5" fill="#2F5BEA"/></svg>
+        <div>
+          <h3>Checking blood sugar</h3>
+          <p>With a finger-prick meter, or a sensor on the arm that reads sugar levels around the clock and sends them to a phone.</p>
+        </div>
+      </li>
+      <li>
+        <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 32c5-10 10-10 16 0s11 10 16 0" fill="none" stroke="#1B2430" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="18" r="3" fill="#F2A93B"/><circle cx="32" cy="18" r="3" fill="#2F5BEA"/></svg>
+        <div>
+          <h3>Balancing food and activity</h3>
+          <p>Matching insulin to meals and exercise. Too little insulin means high sugar; too much can cause a low, which is fixed quickly with juice or glucose tablets.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="part" id="day">
+    <h2>A day with type 1</h2>
+    <p class="prose">Follow Maya, an imaginary 12-year-old, through a school day. Drag the slider or pick a moment to see how food, sport and insulin move her blood sugar.</p>
+    <div class="day">
+      <div class="stage">
+        <svg id="dayChart" viewBox="0 0 1040 400" role="img" aria-labelledby="day-desc">
+          <desc id="day-desc">A line chart of blood sugar from 7 am to 11 pm. It rises after each meal, falls during PE class, dips below the target range at about 3 pm, and returns to range after juice.</desc>
+        </svg>
+      </div>
+      <input type="range" id="dayTime" min="7" max="23" step="0.05" value="15.15" aria-label="Time of day">
+      <div class="readout">
+        <div class="story" aria-live="polite">
+          <h3 id="dayTitle"></h3>
+          <p id="dayText"></p>
+        </div>
+        <div class="now">Blood sugar now<strong><span id="dayValue"></span> <small>mg/dL</small></strong><span id="dayStatus"></span></div>
+      </div>
+      <div class="controls" id="dayJump" role="group" aria-label="Jump to a moment in the day"></div>
+    </div>
+    <p class="prose" style="color: var(--muted); font-size: 0.95rem; margin-top: 18px;">This is a made-up example. Real days vary a lot, and each person's target range is set with their care team.</p>
+  </section>
+
+  <section class="part" id="low">
+    <h2>If someone is having a low</h2>
+    <p class="prose">Low blood sugar comes on fast and needs sugar straight away. Anyone can help.</p>
+    <ul class="low-signs">
+      <li class="label">Look for</li>
+      <li>Shaky</li><li>Sweaty</li><li>Pale</li><li>Confused or irritable</li><li>Suddenly very hungry</li>
+    </ul>
+    <ol class="steps">
+      <li><span class="n" aria-hidden="true">1</span><h3>Give fast sugar</h3><p>Half a cup (about 120 ml) of juice or regular (not diet) soda, or 3 to 4 glucose tablets. That's about 15 grams of sugar.</p></li>
+      <li><span class="n" aria-hidden="true">2</span><h3>Wait 15 minutes</h3><p>Stay with them and have them sit down. Then they check their blood sugar again.</p></li>
+      <li><span class="n" aria-hidden="true">3</span><h3>Still low? Repeat</h3><p>Give the same amount again. Once they feel better, a snack helps keep it steady.</p></li>
+    </ol>
+    <div class="emergency">
+      <svg width="48" height="48" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="#F2A93B"/><rect x="23" y="12" width="6" height="19" rx="3" fill="#1B2430"/><circle cx="26" cy="38" r="3.5" fill="#1B2430"/></svg>
+      <div>
+        <h3>If they pass out or can't swallow</h3>
+        <p><strong>Don't give food or drink.</strong> Lay them on their side and call your local medical emergency number. If they carry glucagon and you know how to give it, use it.</p>
+      </div>
+    </div>
+    <a class="helper-link" href="low-helper.html">
+      <span><b>Happening right now?</b> Open the Low helper. It walks you through each step and runs the 15-minute timer.</span>
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13h15M13.5 6l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p class="fineprint">This is general first-aid information, not medical advice. If the person has their own care plan, follow that. If you are unsure, call your local medical emergency number.</p>
+  </section>
+
+  <section class="part">
+    <h2>Signs to know</h2>
+    <p class="prose">Type 1 can come on over a few weeks. Four early signs are easy to remember:</p>
+    <div class="signs">
+      <div class="sign"><b>Toilet</b><span>needing to pee a lot</span></div>
+      <div class="sign"><b>Thirsty</b><span>always feeling dry</span></div>
+      <div class="sign"><b>Tired</b><span>wiped out for no reason</span></div>
+      <div class="sign"><b>Thinner</b><span>losing weight without trying</span></div>
+    </div>
+    <p class="prose">If you notice these, especially in a child, see a doctor the same day. A quick blood or urine test is the first check, and if it shows high sugar, a hospital confirms it with more tests.</p>
+    <a class="deeper film-link" href="spot-it-in-time.html">
+      <span>
+        <span class="k">Watch · one minute</span>
+        <span class="t">Spot it in time</span>
+        <span class="d">A short animated film of the four signs, as they looked in one home. With a poster to print.</span>
+      </span>
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#2F5BEA"/><path d="M18 13v18l14-9Z" fill="#fff"/></svg>
+    </a>
+  </section>
+
+  <section class="part">
+    <a class="deeper" href="below-the-surface.html">
+      <span>
+        <span class="k">Go deeper</span>
+        <span class="t">Below the surface</span>
+        <span class="d">Scroll beneath one ordinary dinner to see the hidden work of living with type 1.</span>
+      </span>
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#2F5BEA"/><path d="M12 22h19M23.5 14l8 8-8 8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <section class="closing">
+    <p class="big">People with type 1 go to school, run marathons, raise families and do every job you can think of.</p>
+    <p class="prose" style="color: var(--muted);">They just do it while quietly doing the work of a pancreas. A little understanding from the people around them goes a long way.</p>
+  </section>
+
+  <section class="sources" id="sources">
+    <h2>Sources</h2>
+    <p>The facts on this site were last checked against these pages in November 2026. Advice differs a little between countries, so follow your own care team where it does.</p>
+    <ul>
+      <li><a href="https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/type-1-diabetes">Type 1 diabetes</a>, NIDDK (US National Institutes of Health)</li>
+      <li><a href="https://www.cdc.gov/diabetes/about/index.html">Diabetes basics</a>, CDC</li>
+      <li><a href="https://www.nhs.uk/conditions/type-1-diabetes/about-type-1-diabetes/symptoms-and-getting-diagnosed/">Type 1 diabetes: symptoms and getting diagnosed</a>, NHS</li>
+      <li><a href="https://www.diabetes.org.uk/about-us/news-and-views/4ts-campaign">The 4 Ts of type 1 diabetes</a>, Diabetes UK</li>
+      <li><a href="https://www.nhs.uk/conditions/diabetic-ketoacidosis/">Diabetic ketoacidosis</a>, NHS</li>
+      <li><a href="https://www.cdc.gov/diabetes/treatment/treatment-low-blood-sugar-hypoglycemia.html">Treatment of low blood sugar</a>, CDC</li>
+      <li><a href="https://www.nhs.uk/conditions/low-blood-sugar-hypoglycaemia/">Low blood sugar (hypoglycaemia)</a>, NHS</li>
+      <li><a href="https://www.niddk.nih.gov/health-information/professionals/diabetes-discoveries-practice/clinical-targets-for-continuous-glucose-monitoring-data">Clinical targets for continuous glucose monitoring data</a>, NIDDK</li>
+      <li><a href="https://med.stanford.edu/news/insights/2014/05/new-research-keeps-diabetics-safer-during-sleep.html">New research keeps diabetics safer during sleep</a>, Stanford Medicine, 2014 (the “about 180 decisions a day” figure)</li>
+    </ul>
+  </section>
+
+  {% set footnote %}This site is a simple introduction for general information. It is not medical advice and has not been reviewed by a medical professional. <strong>Disclaimer:</strong> For questions about your own health, talk to a doctor. In an emergency, call your local medical emergency number.{% endset %}
+  {% include "footer.njk" %}
+</div>

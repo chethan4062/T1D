@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  {%- if footnote %}
+  <p>{{ footnote | safe }}</p>
+  {%- endif %}
+  <nav aria-label="Site">
+    {%- for item in nav.footer %}
+    <a href="{{ item.href }}">{{ item.label }}</a>
+    {%- endfor %}
+  </nav>
+</footer>

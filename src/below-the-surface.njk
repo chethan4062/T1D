@@ -1,0 +1,122 @@
+---
+layout: "base.njk"
+permalink: "below-the-surface.html"
+title: "Below the surface · Type 1, explained"
+description: "Scroll beneath one ordinary dinner to see the hidden daily work of living with type 1 diabetes."
+section: "living"
+css: ["below-the-surface.css"]
+shareTitle: "Below the surface · Type 1, explained"
+shareDescription: "Scroll beneath one ordinary dinner to see the hidden daily work of living with type 1 diabetes."
+shareImage: "share-below.png"
+shareImageAlt: "Below the surface. Three friends at a dinner table, with water rising from below."
+js: ["below-the-surface.js"]
+---
+
+<main>
+<div class="dive" id="dive">
+
+  <div class="backdrop" id="backdrop">
+    <div class="water" id="water" aria-hidden="true">
+      <svg viewBox="0 0 2400 34" preserveAspectRatio="none"><path d="M0,34 V18 Q150,0 300,18 T600,18 T900,18 T1200,18 T1500,18 T1800,18 T2100,18 T2400,18 V34 Z"/></svg>
+    </div>
+{% set headerClass = "topbar" %}{% include "header.njk" %}
+    <div class="stage" aria-hidden="true"><svg id="scene" viewBox="0 0 600 600"></svg></div>
+    <div class="gauge" aria-hidden="true"></div>
+    <div class="gauge-dot" id="gaugeDot" aria-hidden="true"></div>
+    <div class="gauge-label top" aria-hidden="true">Surface</div>
+    <div class="gauge-label bottom" aria-hidden="true">3 am</div>
+  </div>
+
+  <div class="steps">
+    <section class="step" style="--step-bg:#FFFFFF">
+      <div class="wrap step-inner">
+        <div class="copy">
+          <p class="eyebrow">What you see</p>
+          <h1>Below the surface</h1>
+          <p>Friday night. Priya, 31, is out for dinner with friends. She was diagnosed with type 1 diabetes at 24. Nothing at this table would tell you.</p>
+          <p class="hint">Scroll to go under <svg width="14" height="18" viewBox="0 0 14 18" aria-hidden="true"><path d="M7 1v15M1.5 10.5 7 16l5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" style="--step-bg:#EAF0FF">
+      <div class="wrap step-inner">
+        <div class="copy">
+          <p class="eyebrow">Depth 1 · Under the sleeve</p>
+          <h2>She's wearing two medical devices</h2>
+          <p>A sensor on her arm reads her sugar level every few minutes. A pump at her waist delivers insulin through a thin tube. She wears them day and night and replaces them herself.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" style="--step-bg:#C4D3FF">
+      <div class="wrap step-inner">
+        <div class="copy">
+          <p class="eyebrow">Depth 2 · In the bag</p>
+          <h2>She never leaves home without a kit</h2>
+          <p>A backup insulin pen in case the pump fails. A meter to double-check the sensor. Juice and glucose tablets for lows. Spares of everything. Forgetting it can mean turning around and going home.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step dark" style="--step-bg:#2847B8">
+      <div class="wrap step-inner">
+        <div class="copy">
+          <p class="eyebrow">Depth 3 · On the phone</p>
+          <h2>Her phone is a medical monitor</h2>
+          <p>The sensor sends a reading to her phone all day, and alarms don't wait for a good moment. This one arrived on Tuesday, five minutes before a meeting she was leading.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step dark" style="--step-bg:#1B2F78">
+      <div class="wrap step-inner">
+        <div class="copy">
+          <p class="eyebrow">Depth 4 · In her head</p>
+          <h2>Every meal starts with maths</h2>
+          <p>Before the first bite tonight, Priya works through all of this, and nobody at the table notices. A Stanford Medicine article put it at about 180 health-related decisions a day.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step dark" style="--step-bg:#0E1633">
+      <div class="wrap step-inner">
+        <div class="copy">
+          <p class="eyebrow">Depth 5 · 3 am</p>
+          <h2>It doesn't stop at night</h2>
+          <p>3:07 am. An alarm says she's low. She walks to the kitchen, drinks juice, and waits fifteen minutes to check again. By 3:30 she's back in bed. At 9 she's at her desk, and nobody knows.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" style="--step-bg:#FFFFFF">
+      <div class="wrap step-inner">
+        <div class="copy">
+          <p class="eyebrow">Back at the surface</p>
+          <h2>Same table. Same Priya.</h2>
+          <p>Now you know what's underneath. Most of type 1 is invisible, and the people who live with it do this work every day, on top of everything else.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="after">
+    <h2>What helps</h2>
+    <p class="lede">You don't need to understand the maths. A few small things make life easier for someone with type 1.</p>
+    <ul class="helps">
+      <li><h3>Let them get on with it</h3><p>Checking a phone, pressing buttons on a pump or taking insulin at the table is ordinary. No need to look away or make it a moment.</p></li>
+      <li><h3>Skip the food commentary</h3><p>“Should you be eating that?” never helps. They've already done the sums, probably twice.</p></li>
+      <li><h3>Know what a low looks like</h3><p>If they seem shaky, sweaty or confused, offer juice and stay with them. <a href="low-helper.html">Open the Low helper</a> for what to do.</p></li>
+    </ul>
+    <div class="next">
+      <a class="primary" href="index.html">← Back to the explainer</a>
+      <a href="index.html#day">See a day with type 1</a>
+    </div>
+  </section>
+
+  {% set footnote %}Priya is a made-up person, and her numbers are examples. Everyone's type 1 is different. This page is general information, not medical advice.{% endset %}
+  {% include "footer.njk" %}
+</div>
+</main>

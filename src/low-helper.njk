@@ -1,0 +1,161 @@
+---
+layout: "base.njk"
+permalink: "low-helper.html"
+title: "Low helper · Type 1, explained"
+description: "A step-by-step guide to open when someone with diabetes is having a low. One clear step at a time, with a 15-minute timer."
+section: "tools"
+css: ["low-helper.css"]
+shareTitle: "Low helper: what to do when someone is having a low"
+shareDescription: "Open this when someone with diabetes has low blood sugar. One clear step at a time, with a 15-minute timer."
+shareImage: "share-low.png"
+shareImageAlt: "Low helper. A 15-minute countdown ring."
+js: ["low-helper.js"]
+bodyAttrs: "data-screen=\"start\""
+viewport: "width=device-width, initial-scale=1, viewport-fit=cover"
+icon: "icon-192.png"
+siteScript: false
+headExtra: "<meta name=\"theme-color\" content=\"#FFFFFF\">\n<link rel=\"manifest\" href=\"low-helper.webmanifest\">\n<link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\">\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n<meta name=\"apple-mobile-web-app-title\" content=\"Low helper\">"
+---
+<div class="app">
+
+  <header class="bar">
+    <a href="index.html" aria-label="Type 1, explained: back to the explainer">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8.5" fill="none" stroke-width="3"/></svg>
+      Low helper
+    </a>
+    <button type="button" class="sos" data-go="emergency"><i aria-hidden="true">!</i>Passed out?</button>
+  </header>
+
+  <main>
+  <!-- Start -->
+  <section class="screen" data-name="start">
+    <div class="body">
+      <p class="step">Low blood sugar</p>
+      <h1>Is someone having a low?</h1>
+      <p class="lede">Shaky, sweaty, pale, confused or suddenly very hungry. This will walk you through it, one step at a time.</p>
+      <p class="note">First question: are they awake and able to swallow?</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" data-go="sugar">Yes, they're awake <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13h15M13.5 6l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="btn ghost" data-go="emergency">No, or they're having a seizure</button>
+    </div>
+    <p class="foot notice">This is general first-aid information, not medical advice, and not a medical device. If they have their own care plan, follow that. If you are unsure at any point, call your local medical emergency number.</p>
+  </section>
+
+  <!-- Step 1 -->
+  <section class="screen" data-name="sugar" hidden>
+    <div class="body">
+      <p class="step" id="sugarStep">Step 1 of 3</p>
+      <h1 id="sugarTitle">Give fast sugar now</h1>
+      <p class="lede" id="sugarLede">Any one of these. About 15 grams of sugar.</p>
+      <ul class="foods">
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M10 8h20l-3 26H13Z" fill="#fff" stroke="#1B2430" stroke-width="2.5" stroke-linejoin="round"/><path d="M11.4 20h17.2L27 34H13Z" fill="#F2A93B"/></svg>
+          <div><b>Juice</b><span>half a cup (120 ml)</span></div>
+        </li>
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="6" width="18" height="29" rx="4" fill="#2F5BEA" stroke="#1B2430" stroke-width="2.5"/><rect x="11" y="15" width="18" height="9" fill="#fff"/><path d="M17 6V3h6" fill="none" stroke="#1B2430" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <div><b>Regular soda</b><span>half a cup, not diet</span></div>
+        </li>
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="13" cy="14" r="8" fill="#fff" stroke="#1B2430" stroke-width="2.5"/><circle cx="27" cy="16" r="8" fill="#fff" stroke="#1B2430" stroke-width="2.5"/><circle cx="19" cy="28" r="8" fill="#F2A93B" stroke="#1B2430" stroke-width="2.5"/></svg>
+          <div><b>Glucose tablets</b><span>3 to 4 tablets</span></div>
+        </li>
+        <li>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="14" cy="14" rx="10" ry="7" transform="rotate(-35 14 14)" fill="#fff" stroke="#1B2430" stroke-width="2.5"/><path d="M21 20l13 14" stroke="#1B2430" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="14" cy="13" rx="6" ry="3.5" transform="rotate(-35 14 13)" fill="#F2A93B"/></svg>
+          <div><b>Sugar or honey</b><span>1 tablespoon</span></div>
+        </li>
+      </ul>
+      <p class="nots">Not diet drinks, and not chocolate: it works too slowly. Small children may need less.</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" data-go="timer"><span>They've had it<small>Start the 15-minute timer</small></span> <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13h15M13.5 6l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="screen" data-name="timer" hidden>
+    <div class="body">
+      <p class="step" style="text-align:center">Step 2 of 3 · Wait</p>
+      <div class="ringwrap">
+        <div class="pulse" aria-hidden="true"></div>
+        <div class="pulse two" aria-hidden="true"></div>
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="track" cx="100" cy="100" r="92"/>
+          <circle class="fill" id="ringFill" cx="100" cy="100" r="92"/>
+        </svg>
+        <div class="clock" role="timer" aria-live="off"><b id="clock">15:00</b><span>until you check</span></div>
+      </div>
+      <div class="calm" aria-live="polite">
+        <h2 id="calmTitle">Stay with them</h2>
+        <p id="calmText">Have them sit down. The sugar needs time to work.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn ghost" data-go="check">They feel better already</button>
+      <button type="button" class="btn ghost" data-go="emergency">They're getting worse</button>
+    </div>
+    <p class="foot" style="text-align:center">Keep this screen open. It should chime when the time is up, but don't rely on the alarm alone: keep an eye on the clock and on them.</p>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="screen" data-name="check" hidden>
+    <div class="body">
+      <p class="step">Step 3 of 3</p>
+      <h1>Check their blood sugar</h1>
+      <p class="lede">Ask them to check with their meter or sensor. No way to check? Go by how they feel.</p>
+      <p class="note">In range means above 70 mg/dL (about 4 mmol/L).</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" data-go="done">Back in range, or feeling better <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13.5l5.5 5.5L21 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="btn ghost" data-go="again">Still low, or no better</button>
+    </div>
+  </section>
+
+  <!-- Done -->
+  <section class="screen" data-name="done" hidden>
+    <div class="body">
+      <svg class="tick" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="40" fill="#2F5BEA"/><path d="M25 43l12 12 23-25" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h1>Well done. Now a snack.</h1>
+      <p class="lede">The fast sugar wears off quickly, so they need something that lasts.</p>
+      <ul class="after">
+        <li><b>Give a snack with carbs and protein</b>A sandwich, crackers with cheese or peanut butter, or a glass of milk. Skip this if a meal is coming soon.</li>
+        <li><b>Stay a little longer</b>They may feel tired, shaky or have a headache for a while.</li>
+        <li><b>No driving yet</b>They should wait until they feel fully back to normal.</li>
+      </ul>
+    </div>
+    <div class="actions">
+      <a class="btn" href="index.html">Back to the explainer</a>
+      <button type="button" class="btn ghost" data-go="start">Start again</button>
+    </div>
+  </section>
+
+  <!-- Emergency -->
+  <section class="screen" data-name="emergency" hidden>
+    <div class="body">
+      <p class="step">Emergency</p>
+      <h1>Call your local medical emergency number now</h1>
+      <p class="lede">Use your phone to call. Say “diabetic, unconscious”.</p>
+      <ol class="todo">
+        <li><div><b>Nothing in their mouth</b>No food, no drink. They could choke.</div></li>
+        <li><div><b>Lay them on their side</b>Top knee bent, head tilted back a little so they can breathe.
+          <svg class="side" viewBox="0 0 250 100" aria-hidden="true">
+            <line x1="8" y1="92" x2="242" y2="92" stroke="#36404F" stroke-width="3" stroke-linecap="round"/>
+            <path d="M150 52H232" stroke="#fff" stroke-width="17" stroke-linecap="round"/>
+            <path d="M148 56l34 26h40" fill="none" stroke="#F2A93B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M66 50H148" stroke="#fff" stroke-width="30" stroke-linecap="round"/>
+            <path d="M84 56l20 26H70" fill="none" stroke="#F2A93B" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="36" cy="54" r="17" fill="#fff"/>
+          </svg>
+        </div></li>
+        <li><div><b>Give glucagon, if you know how</b>Many people with diabetes carry it as a nasal spray or injection. Check their bag.</div></li>
+        <li><div><b>Stay until help arrives</b>If they wake up and can swallow, give fast sugar.</div></li>
+      </ol>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn ghost" data-go="sugar">They're awake and can swallow</button>
+    </div>
+  </section>
+  </main>
+  <p class="legal">General information, not medical advice. <a href="disclaimer.html">Disclaimer</a> · <a href="index.html#sources">Sources</a></p>
+</div>
