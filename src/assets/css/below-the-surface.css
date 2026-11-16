@@ -139,8 +139,8 @@ p { margin: 0; }
 @media (max-width: 860px) {
   body { font-size: 1.0625rem; }
   .stage {
-    right: auto; left: 50%; top: 56px; transform: translateX(-50%);
-    width: min(92vw, 47vh);
+    right: auto; left: 50%; top: 78px; transform: translateX(-50%);
+    width: min(92vw, 45vh);
   }
   .step-inner { align-items: flex-end; padding-bottom: 4vh; }
   .copy { width: 100%; }

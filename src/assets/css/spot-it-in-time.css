@@ -94,7 +94,9 @@ p { margin: 0; }
 /* ---------- Phones ---------- */
 @media (max-width: 860px) {
   body { font-size: 1.0625rem; }
-  .chapters { padding-top: 8px; }
+  .chapters { padding-top: 0; }
+  .chapters button { height: 40px; }
+  .chapters button::before, .chapters button i { top: 18px; }
   .screen { grid-template-columns: 1fr; gap: 14px; align-items: start; align-content: start; padding-top: 4px; }
   .stage { grid-row: 1; justify-self: center; width: min(92vw, 44vh); }
   .caption { min-height: 11.5em; justify-content: flex-start; }
