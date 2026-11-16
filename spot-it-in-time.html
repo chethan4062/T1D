@@ -234,7 +234,7 @@
         <div>
           <p class="eyebrow">What to do</p>
           <h2 class="long">Ask for a test today</h2>
-          <p>A finger-prick blood test or a urine test takes minutes. See a doctor the same day and say you are worried about type 1 diabetes.</p>
+          <p>See a doctor the same day and say you are worried about type 1 diabetes. A quick finger-prick or urine test is the first check, and it takes minutes. If it shows high sugar, more blood tests at a hospital confirm the diagnosis.</p>
           <p class="urgent"><b>Go to emergency care now if they also</b><span>are being sick, have tummy pain, are breathing fast and deep, have breath that smells fruity, or are very sleepy or confused.</span></p>
           <div class="row" id="endRow" hidden>
             <button type="button" class="pill" data-replay>Watch again</button>
@@ -575,7 +575,7 @@
     const done = el("g", {}, g);
     el("circle", { cx: 300, cy: 312, r: 34, fill: BLUE }, done);
     el("path", { d: "M284,313 l11,11 l21,-23", fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" }, done);
-    text(done, 300, 374, "Result ready", { size: 17, weight: 800 });
+    text(done, 300, 374, "First result ready", { size: 17, weight: 800 });
     const drop = el("path", { d: "M0,-22 C12,-4 15,4 15,10 A15,15 0 0 1 -15,10 C-15,4 -12,-4 0,-22 Z", fill: RED }, g);
     const note = chip(g, 470, 150, 190);
     return h => {
@@ -591,7 +591,7 @@
       done.setAttribute("opacity", ok);
       done.setAttribute("transform", `translate(300,320) scale(${(0.7 + 0.3 * ok).toFixed(3)}) translate(-300,-320)`);
       note.g.setAttribute("opacity", smooth(span(h, 0.02, 0.1)));
-      note.set(run >= 1 ? "That's all it takes" : "One drop of blood");
+      note.set(run >= 1 ? "The first check" : "One drop of blood");
     };
   }
 
